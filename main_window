@@ -8,5 +8,5 @@ button = tk.Button(name= 'Click me')
 button.grid(1,0)
 
 label= tk.Label("Welcome to ISP").grid(0,0)
-label.pack()
+
 window.mainLoop()
