@@ -1,5 +1,5 @@
 import tkinter as tk
-#fgahshasasasasaaaaa
+
 window = tk.Tk()
 window.title("Image Signature Prorame")
 
