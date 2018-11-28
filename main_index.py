@@ -47,19 +47,8 @@ class Picture:
 
 
 if __name__ == '__main__':
-
-    # pic = Image.open('awesome.jpg')
-
-    # createBW()
-
-    # print('Images\{}'.format(file))
-    # createNewFolder('Vivid')
     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp\Images\wooster1.jpg'
+    # createNewFolder("B&W", path)
+    ThumnailsFolder()
 
-    # ThumnailsFolder()
-    newPic = Picture(path)
-    newPic.image.show()
-    newPic.createThumbnail(20,30)
-    print(newPic.thumList)
-    newPic.thumList[(20,30)].show()
 
