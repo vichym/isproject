@@ -8,12 +8,12 @@ def createThumbnails(pic, w, h):
     return newPic
 
 
-def BWFolder():
-    path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
-    newpath = createNewFolder("B&W", path)
-    for file in os.listdir('Images'):
-        newf = Image.open("Images\{}".format(str(file))).copy()
-        newf.convert(mode='L').save(newpath + '\{}_{}'.format("BW", file))
+# def BWFolder():
+#     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
+#     newpath = createNewFolder("B&W", path)
+#     for file in os.listdir('Images'):
+#         newf = Image.open("Images\{}".format(str(file))).copy()
+#         newf.convert(mode='L').save(newpath + '\{}_{}'.format("BW", file))
 
 
 def ThumnailsFolder():
@@ -40,7 +40,7 @@ class Picture:
 
     def createThumbnail(self, w, h):
         name = (w, h)
-        newPic = self.image.copy()  # .thumbnail((w,h))
+        newPic = self.image.copy()
         newPic.thumbnail((w, h))
         self.thumList[name] = newPic
         return newPic
