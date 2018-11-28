@@ -7,7 +7,7 @@ def createThumbnails(pic, w, h):
     newPic.thumbnail((w, h))
     return newPic
 
-
+#
 # def BWFolder():
 #     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
 #     newpath = createNewFolder("B&W", path)
