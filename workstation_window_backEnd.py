@@ -28,6 +28,7 @@ def createNewProjectFolder(name, path):
         os.mkdir(newPath)
     return newPath
 
+
 class Picture:
 
     def __init__(self, *args):
