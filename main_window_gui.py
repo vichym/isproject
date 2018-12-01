@@ -1,5 +1,6 @@
 import tkinter as tk
-
+from PIL import Image
+from PIL import ImageTk
 
 class Window1:
     def __init__(self):
@@ -38,7 +39,7 @@ class Window2:
         self.frame1 = tk.Frame(self.mainWin, padx=10, pady=10)
         self.frame1.grid(row = 0, column = 0)
 
-        pic=Image.open('SampleImages/._butterfly.jpg')
+        pic=Image.open('SampleImages\._butterfly.jpg')
 
         self.image1 = ImageTk.PhotoImage(pic)
         imgLabel = tk.Label(self.frame1, image=self.image1)
@@ -47,5 +48,8 @@ class Window2:
     def run(self):
         self.mainWin.mainloop()
 
-myGui = Window2()
-myGui.run()
+# myGui = Window2()
+# myGui.run()
+
+pic = Image.open("E:\isproject\SampleImages\._butterfly.jpg" )
+pic.explore()
