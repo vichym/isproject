@@ -28,6 +28,7 @@ class Window1:
         label5 = tk.Button(self.mainWin, image = self.file1Image, height = 250, width = 300)
         label5.grid(row=1, column=0)
 
+
     def run(self):
         self.mainWin.mainloop()
 
