@@ -1,20 +1,13 @@
+
+
 from PIL import Image
 import os
 
-
+# To create thumnails of a picture
 def createThumbnails(pic, w, h):
     newPic = pic.copy()
     newPic.thumbnail((w, h))
     return newPic
-
-
-# def ThumnailsFolder():
-#     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
-#     newpath = createNewFolder("Thumbnails", path)
-#     for file in os.listdir('Images'):
-#         thumnail = Image.open("Images\{}".format(file))
-#         createThumbnails(thumnail, 220, 300).save(newpath + '\{}_{}'.format('thumbnail', file))
-
 
 def createNewProjectFolder(name, path):
     """
@@ -33,18 +26,18 @@ class Picture:
 
     def __init__(self, *args):
         self.image = Image.open(args[0])
-        self.thumList = {}
-        self.thumVersion = self.createThumbnail(250, 300)
+        self.thumnailsList = {}
+        self.thumnailVersion = self.createThumbnail(250, 300)
 
     def createThumbnail(self, w, h):
         name = (w, h)
         newPic = self.image.copy()
         newPic.thumbnail((w, h))
-        self.thumList[name] = newPic
+        self.thumnailsList[name] = newPic
         return newPic
 
     def getThumlist(self):
-        return self.thumList
+        return self.thumnailsList
 
 
 if __name__ == '__main__':
