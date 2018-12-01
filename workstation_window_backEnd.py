@@ -7,24 +7,22 @@ def createThumbnails(pic, w, h):
     newPic.thumbnail((w, h))
     return newPic
 
-#
-# def BWFolder():
+
+# def ThumnailsFolder():
 #     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
-#     newpath = createNewFolder("B&W", path)
+#     newpath = createNewFolder("Thumbnails", path)
 #     for file in os.listdir('Images'):
-#         newf = Image.open("Images\{}".format(str(file))).copy()
-#         newf.convert(mode='L').save(newpath + '\{}_{}'.format("BW", file))
+#         thumnail = Image.open("Images\{}".format(file))
+#         createThumbnails(thumnail, 220, 300).save(newpath + '\{}_{}'.format('thumbnail', file))
 
 
-def ThumnailsFolder():
-    path = r'C:\Users\LYHENG-HD\PycharmProjects\isp'
-    newpath = createNewFolder("Thumbnails", path)
-    for file in os.listdir('Images'):
-        thumnail = Image.open("Images\{}".format(file))
-        createThumbnails(thumnail, 220, 300).save(newpath + '\{}_{}'.format('thumbnail', file))
-
-
-def createNewFolder(name, path):
+def createNewProjectFolder(name, path):
+    """
+    Creates new folder for a new project where final project is store.
+    :param name: <string> the name of the new folder.
+    :param path: <string> directory path
+    :return: void
+    """
     newPath = path + '\{}'.format(name)
     if not os.path.exists(newPath):
         os.mkdir(newPath)
@@ -45,8 +43,10 @@ class Picture:
         self.thumList[name] = newPic
         return newPic
 
+    def getThumlist(self):
+        return self.thumList
+
 
 if __name__ == '__main__':
     path = r'C:\Users\LYHENG-HD\PycharmProjects\isp\Images\wooster1.jpg'
-    # createNewFolder("B&W", path)
-    ThumnailsFolder()
+
