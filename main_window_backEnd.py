@@ -3,7 +3,9 @@ import os
 from tkinter import filedialog
 from main_window_gui import *
 
+
 class Project:
+
     def __int__(self):
         self.window = Window2.__init__()
         self.list = selectFilesDialogue(self.window)
@@ -12,8 +14,9 @@ class Project:
 
     def getName(self):
         return self.name
-    def __set_name__(self, owner, name):
 
+    def setName(self, newName):
+        self.name = newName
 
 
 class Picture:
@@ -49,6 +52,7 @@ def createThumbnails(pic, w, h):
     newPic.thumbnail((w, h))
     return newPic
 
+
 def createNewProjectFolder(name, path):
     """
     Creates new folder for a new project where final project is store.
@@ -68,13 +72,6 @@ def selectFilesDialogue(rootWindow):
         :param rootWindow: (window) the root window
         :return: (list) list of the path to the selected files
     """
-    files = filedialog.askopenfilenames(parent=rootWindow,title='Choose a file')
+    files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
-
-
-
-
-
-
-
