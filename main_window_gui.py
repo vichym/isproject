@@ -30,7 +30,6 @@ class Window1:
         label5.grid(row=1, column=0)
 
 
-
     def run(self):
         self.mainWin.mainloop()
 
