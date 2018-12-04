@@ -1,6 +1,6 @@
 from PIL import Image
 import os
-from tkinter import filedialog
+from tkinter import filedialog, simpledialog
 from main_window_gui import *
 
 
@@ -8,7 +8,7 @@ class Project:
 
     def __int__(self):
         self.window = Window2.__init__()
-        self.list = selectFilesDialogue(self.window)
+        self.imagesList = selectFilesDialogue(self.window)
         self.name = Window2.getProjectName()
         self.path = ''
         self.rootFolder = createNewProjectFolder(self.name, self.path)
@@ -18,7 +18,6 @@ class Project:
 
     def setName(self, newName):
         self.name = newName
-
 
 
 class Picture:
@@ -77,3 +76,9 @@ def selectFilesDialogue(rootWindow):
     files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
+
+
+def getProjectName(self):
+    inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
+                                              parent=self.mainWin)
+    return inputProjectName

@@ -35,6 +35,8 @@ class Window1:
         self.mainWin.mainloop()
 
 
+
+
 # myGui = Window1()
 # myGui.run()
 
@@ -89,10 +91,6 @@ class Window2:
         self.mainPic = tk.Label(self.frame2, image=self.pic, width=200, height=200)
         self.mainPic.grid(row=0, column=0)
 
-    def getProjectName(self):
-        inputProjectName = tk.simpledialog.askstring("Input Project Name", "How do you like to name your project?",
-                                                     parent=self.mainWin)
-        return inputProjectName
 
     def run(self):
         self.mainWin.mainloop()
