@@ -10,6 +10,11 @@ class Project:
         self.name = Window2.getProjectName()
         self.rootFolder = createNewProjectFolder()
 
+    def getName(self):
+        return self.name
+    def __set_name__(self, owner, name):
+
+
 
 class Picture:
     """
