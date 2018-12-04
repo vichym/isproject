@@ -10,13 +10,15 @@ class Project:
         self.window = Window2.__init__()
         self.list = selectFilesDialogue(self.window)
         self.name = Window2.getProjectName()
-        self.rootFolder = createNewProjectFolder()
+        self.path = ''
+        self.rootFolder = createNewProjectFolder(self.name, self.path)
 
     def getName(self):
         return self.name
 
     def setName(self, newName):
         self.name = newName
+
 
 
 class Picture:
@@ -55,7 +57,7 @@ def createThumbnails(pic, w, h):
 
 def createNewProjectFolder(name, path):
     """
-    Creates new folder for a new project where final project is store.
+    Creates new folder for a new project where final project is store if there is no project folder exist
         :param name: <string> the name of the new folder.
         :param path: <string> directory path
         :return: void
