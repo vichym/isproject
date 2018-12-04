@@ -1,6 +1,14 @@
 from PIL import Image
 import os
 from tkinter import filedialog
+from main_window_gui import *
+
+class Project:
+    def __int__(self):
+        self.window = Window2.__init__()
+        self.list = selectFilesDialogue(self.window)
+        self.name = Window2.getProjectName()
+        self.rootFolder = createNewProjectFolder()
 
 
 class Picture:
@@ -58,6 +66,8 @@ def selectFilesDialogue(rootWindow):
     files = filedialog.askopenfilenames(parent=rootWindow,title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
+
+
 
 
 

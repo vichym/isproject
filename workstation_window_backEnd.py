@@ -1,6 +1,5 @@
 
-from PIL import ImageEnhance,
-
+from PIL import ImageEnhance
 
 # enhancer = ImageEnhance.Sharpness)
 
