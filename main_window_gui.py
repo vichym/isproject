@@ -36,8 +36,6 @@ class Window1:
 
 
 
-# myGui = Window1()
-# myGui.run()
 
 class Window2:
     def __init__(self):
@@ -81,7 +79,7 @@ class Window2:
         self.img8 = tk.Button(self.frame1, text="+", font="Arial 32 bold", width=4, height=1, relief=tk.GROOVE)
         self.img8.grid(row=2, column=6)
 
-        self.scrollbarF1 = tk.Scrollbar(self.frame1).grid(row=0, column=7)
+        self.scrollbarF1 = tk.Scrollbar(self.frame1).grid(row=0, column=7, rowspan = 3)
 
         # Frame 2
         self.frame2 = tk.Frame(self.mainWin, padx=150, pady=64, highlightthickness=1, highlightbackground='black')
@@ -94,6 +92,8 @@ class Window2:
     def run(self):
         self.mainWin.mainloop()
 
-
-myGui = Window2()
-myGui.run()
+if __name__ == '__main__':
+    myGui = Window1()
+    myGui.run()
+    myGui = Window2()
+    myGui.run()

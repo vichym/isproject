@@ -82,3 +82,8 @@ def getProjectName(self):
     inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
                                               parent=self.mainWin)
     return inputProjectName
+
+if __name__ == '__main__':
+    win= tk.Tk()
+    list = selectFilesDialogue(win)
+    print(list)
