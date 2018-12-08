@@ -1,4 +1,5 @@
-from PIL import Image
+
+import PIL.Image as Image
 import os
 from tkinter import filedialog, simpledialog
 from main_window_gui import *
@@ -24,7 +25,7 @@ class Project:
         self.name = newName
 
 
-class Picture:
+class Photo:
     """
     Picture objects contain a full size image object and a list of different size thumbnails.
     """
@@ -38,8 +39,13 @@ class Picture:
         name = (w, h)
         newPic = self.image.copy()
         newPic.thumbnail((w, h))
+
+        # covert to TmageTK object to be used with tkinter button widget
+        newPic = ImageTk.PhotoImage(newPic)
+
         self.thumbnailsList[name] = newPic
         return newPic
+
 
     def getThumlist(self):
         return self.thumbnailsList
@@ -79,11 +85,7 @@ def selectFilesDialogue(rootWindow):
     """
     files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
-    picturesList = []
-    for i in selectedFiles:
-        picturesList.append(i)
-    print(picturesList)
-    return picturesList
+    return selectedFiles
 
 def getProjectName(self):
     inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
@@ -93,12 +95,8 @@ def getProjectName(self):
 #Test
 
 if __name__ == '__main__':
-    # win = tk.Tk()
-    # files = filedialog.askopenfilenames(parent=win, title='Choose a file')
-    # selectedFiles = win.tk.splitlist(files)
-    # win.mainloop()
-
     win = tk.Tk()
-    selectFilesDialogue(win)
-
+    files = filedialog.askopenfilenames(parent=win, title='Choose a file')
+    selectedFiles = win.tk.splitlist(files)
     win.mainloop()
+
