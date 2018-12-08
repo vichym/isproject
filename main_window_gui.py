@@ -115,7 +115,7 @@ class Window2:
         self.filter6.grid(row=2, column=4)
         space = tk.Label(self.frame3, width=4).grid(row=2, column=5)
 
-        # use just like Entry widget (self.scaleRED.get() etc)
+        # use just like Entry widget (self.scaleRED.get() etc.)
         self.scaleRED = tk.Scale(self.frame3, from_=0,to_=255,orient='horizontal', label ='RED')
         self.scaleRED.grid(row=0,column=6)
 
