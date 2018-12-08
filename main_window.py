@@ -24,6 +24,7 @@ class Window:
         self.frame3.grid_propagate(0)
         self.frame4.grid_propagate(0)
 
+        self.buttonList = []
         self.img1 = tk.Button(self.frame1, text="+", font="Arial 32 bold", height=1,width =3, relief=tk.RIDGE,
                               command = self.selectFilesDialogue)
         self.img1.grid(row=0, column=0, padx=10, pady=10)
@@ -41,16 +42,30 @@ class Window:
             :param rootWindow: (window) the root window
             :return: (list) list of the path to the selected files
         """
+        # Diaglogue window to select files
         files = filedialog.askopenfilenames(parent=self.mainWin, title='Choose a file')
         selectedFiles = self.mainWin.tk.splitlist(files)
+
+        # Need to assign all the images into a self.pictureList so that python garbage collector won't wipe data.
         self.picturesList = []
-        for i in selectedFiles:
-            self.picturesList.append(Photo(i))
+        for j in selectedFiles:
+            self.picturesList.append(Photo(j))  # Photo object that contain an image file and
+
+        # Create buttons displaying all images
 
         for i in range(len(self.picturesList)):
-            tk.Button(self.frame1, image=self.picturesList[i].thumbnailVersion, width=100, height=100, relief=tk.GROOVE).grid(
-                row=i//3, column=i % 3 + 1, padx=5, pady=5)
+            self.buttonList.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailVersion))
+            self.buttonList[i].configure(width=100, height=100, relief=tk.GROOVE, )
+            self.buttonList[i].grid(row=i//3, column=i % 3 + 1, padx=5, pady=5)
+            self.buttonList[i].bind()
 
+
+
+    def display(self, photo):
+        self.displayLabel =tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
+        self.displayLabel.grid(row=0, column=0)
+
+        # command = self.display(self.picturesList[i].createThumbnail(200))
 
     def new_window(self):
         self.newWindow = tk.Toplevel(self.mainWin)

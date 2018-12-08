@@ -33,12 +33,29 @@ class Photo:
     def __init__(self, *args):
         self.image = Image.open(args[0])
         self.thumbnailsList = {}
-        self.thumbnailVersion = self.createThumbnail(250, 300)
+        self.thumbnailVersion = self.createThumbnail(100)
 
-    def createThumbnail(self, w, h):
-        name = (w, h)
+    def createThumbnail(self, max):
+
+        max = 100
+        w, h = self.image.size
+        newW = w
+        print (w , h)
+        if w > h:
+            newW = max
+            newH = int(h * newW / w)
+            print("newW:", newW)
+        elif w<h:
+            newH = max
+            newH = int(w * newH / h)
+            print("newH: ", newH)
+        else:
+            newW=max
+            newH=max
+
+        name = (newW, newH)
         newPic = self.image.copy()
-        newPic.thumbnail((w, h))
+        newPic.thumbnail((newW, newH))
 
         # covert to TmageTK object to be used with tkinter button widget
         newPic = ImageTk.PhotoImage(newPic)
@@ -99,4 +116,6 @@ if __name__ == '__main__':
     files = filedialog.askopenfilenames(parent=win, title='Choose a file')
     selectedFiles = win.tk.splitlist(files)
     win.mainloop()
+
+
 
