@@ -11,7 +11,7 @@ class Window:
         self.mainWin = tk.Tk()
 
         # Create 4 main frames
-        self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="red", bd=5, relief=tk.SUNKEN)
+        self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="white", bd=5, relief=tk.SUNKEN)
         self.frame2 = tk.Frame(self.mainWin, width=200, height=300, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=600, height=200, background="Yellow", bd=5)
         self.frame4 = tk.Frame(self.mainWin, width=200, height=200, background="green", bd=5)
@@ -37,7 +37,7 @@ class Window:
         # --------------FRAME 2 --------------------------
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
-        self.displayLabel.grid(row=0, column=0, justify=tk.CENTER)
+
 
     def selectFilesDialogue(self):
         """
@@ -57,34 +57,22 @@ class Window:
 
         for i in range(len(self.picturesList)):
             self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
-            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0, )
+            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0,
+                                                command=self.display(self.picturesList[i].createThumbnail(200)))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
 
     def display(self, photo):
-        tk.Label(self.frame2, image = photo, relief=tk.GROOVE)
+        tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
+        self.displayLabel.pack(anchor=tk.CENTER)
 
 
         # command = self.display(self.picturesList[i].createThumbnail(200))
 
-    def new_window(self):
-        self.newWindow = tk.Toplevel(self.mainWin)
-        self.app = Demo2(self.newWindow)
+
 
     def run(self):
         self.mainWin.mainloop()
-
-
-class Demo2:
-    def __init__(self, master):
-        self.master = master
-        self.frame = tk.Frame(self.master)
-        self.quitButton = tk.Button(self.frame, text='Quit', width=25, command=self.close_windows)
-        self.quitButton.pack()
-        self.frame.pack()
-
-    def close_windows(self):
-        self.master.destroy()
 
 
 def version():
