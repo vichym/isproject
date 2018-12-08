@@ -33,26 +33,23 @@ class Photo:
     def __init__(self, *args):
         self.image = Image.open(args[0])
         self.thumbnailsList = {}
-        self.thumbnailVersion = self.createThumbnail(100)
+        self.thumbnailForButton = self.createThumbnail(100)
 
     def createThumbnail(self, max):
-
-        max = 100
         w, h = self.image.size
-        newW = w
-        print (w , h)
+
+        print(w , h)
         if w > h:
             newW = max
             newH = int(h * newW / w)
-            print("newW:", newW)
+            print("newW:", newW, "newH: ", newH )
         elif w<h:
             newH = max
-            newH = int(w * newH / h)
-            print("newH: ", newH)
+            newW = int(w * newH / h)
+            print("newH: ", newH, "newW:", newW)
         else:
             newW=max
             newH=max
-
         name = (newW, newH)
         newPic = self.image.copy()
         newPic.thumbnail((newW, newH))

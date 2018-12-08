@@ -6,6 +6,8 @@ from main_window_backEnd import *
 
 class Window:
     def __init__(self):
+
+        self.picturesList = []
         self.mainWin = tk.Tk()
 
         self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="red", bd=5, relief=tk.SUNKEN)
@@ -25,10 +27,10 @@ class Window:
         self.frame4.grid_propagate(0)
 
         self.buttonList = []
-        self.img1 = tk.Button(self.frame1, text="+", font="Arial 32 bold", height=1,width =3, relief=tk.RIDGE,
-                              command = self.selectFilesDialogue)
+        self.img1 = tk.Button(self.frame1, text="+", font="Arial 32 bold", height=1, width=3, relief=tk.RIDGE,
+                              command=self.selectFilesDialogue)
         self.img1.grid(row=0, column=0, padx=10, pady=10)
-
+        self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
         # Frame 2
         # self.frame2 = tk.Frame(self.mainWin, padx=150, pady=64, highlightthickness=1, highlightbackground='black')
         # self.frame2.grid(row=0, column=1, sticky='E' + 'N')
@@ -43,27 +45,24 @@ class Window:
             :return: (list) list of the path to the selected files
         """
         # Diaglogue window to select files
-        files = filedialog.askopenfilenames(parent=self.mainWin, title='Choose a file')
-        selectedFiles = self.mainWin.tk.splitlist(files)
+        files_Path = filedialog.askopenfilenames(parent=self.mainWin, title='Choose a file')
+        selected_Files = self.mainWin.tk.splitlist(files_Path)
 
         # Need to assign all the images into a self.pictureList so that python garbage collector won't wipe data.
-        self.picturesList = []
-        for j in selectedFiles:
+        for j in selected_Files:
             self.picturesList.append(Photo(j))  # Photo object that contain an image file and
 
         # Create buttons displaying all images
 
         for i in range(len(self.picturesList)):
-            self.buttonList.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailVersion))
-            self.buttonList[i].configure(width=100, height=100, relief=tk.GROOVE, )
-            self.buttonList[i].grid(row=i//3, column=i % 3 + 1, padx=5, pady=5)
-            self.buttonList[i].bind()
-
+            self.buttonList.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
+            self.buttonList[i].configure(width=100, height=100, relief=tk.FLAT, bd=0, )
+            self.buttonList[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
 
     def display(self, photo):
-        self.displayLabel =tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
-        self.displayLabel.grid(row=0, column=0)
+        self.displayLabel = tk.Label(self.frame2, image = photo, relief=tk.GROOVE)
+        self.displayLabel.grid(row=0, column=0,justify = tk.CENTER)
 
         # command = self.display(self.picturesList[i].createThumbnail(200))
 
@@ -102,21 +101,20 @@ def version():
     frame3.grid(row=1, column=0)
     frame4.grid(row=1, column=1)
 
-
     frame1.grid_propagate(0)
     frame2.grid_propagate(0)
     frame3.grid_propagate(0)
     frame4.grid_propagate(0)
 
-    img1 = tk.Button(frame1, text="+", font="Arial 32 bold",  relief=tk.GROOVE, command=selectFilesDialogue(mainWin))
+    img1 = tk.Button(frame1, text="+", font="Arial 32 bold", relief=tk.GROOVE, command=selectFilesDialogue(mainWin))
     img1.grid(row=0, column=0, padx=10, pady=10)
 
     mainWin.mainloop()
 
 
 def test():
-
     pass
+
 
 if __name__ == '__main__':
     window1 = Window()
