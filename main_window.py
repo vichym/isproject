@@ -38,7 +38,6 @@ class Window:
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
 
-
     def selectFilesDialogue(self):
         """
         create a dialogue window to prompt the users to selects image files to process.
@@ -61,15 +60,11 @@ class Window:
                                                 command=self.display(self.picturesList[i].createThumbnail(200)))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
-
     def display(self, photo):
         tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
         self.displayLabel.pack(anchor=tk.CENTER)
 
-
         # command = self.display(self.picturesList[i].createThumbnail(200))
-
-
 
     def run(self):
         self.mainWin.mainloop()
