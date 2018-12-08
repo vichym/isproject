@@ -10,33 +10,34 @@ class Window:
         self.picturesList = []
         self.mainWin = tk.Tk()
 
+        # Create 4 main frames
         self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="red", bd=5, relief=tk.SUNKEN)
         self.frame2 = tk.Frame(self.mainWin, width=200, height=300, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=600, height=200, background="Yellow", bd=5)
         self.frame4 = tk.Frame(self.mainWin, width=200, height=200, background="green", bd=5)
-
         self.frame1.grid(row=0, column=0)
         self.frame2.grid(row=0, column=1)
-
         self.frame3.grid(row=1, column=0)
         self.frame4.grid(row=1, column=1)
-
         self.frame1.grid_propagate(0)
         self.frame2.grid_propagate(0)
         self.frame3.grid_propagate(0)
         self.frame4.grid_propagate(0)
 
-        self.buttonList = []
-        self.img1 = tk.Button(self.frame1, text="+", font="Arial 32 bold", height=1, width=3, relief=tk.RIDGE,
-                              command=self.selectFilesDialogue)
-        self.img1.grid(row=0, column=0, padx=10, pady=10)
+        # --------------FRAME 1-------------------------
+        # ---List containing small photos in frame 1---
+        self.photo_button_List = []
+
+        # ----Add Photo Button----
+        self.addPhotoButton = tk.Button(self.frame1, text="+", font="Arial 32 bold",
+                                        height=1, width=3, relief=tk.RIDGE,
+                                        command=self.selectFilesDialogue)
+        self.addPhotoButton.grid(row=0, column=0, padx=10, pady=10)
+
+        # --------------FRAME 2 --------------------------
+        # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
-        # Frame 2
-        # self.frame2 = tk.Frame(self.mainWin, padx=150, pady=64, highlightthickness=1, highlightbackground='black')
-        # self.frame2.grid(row=0, column=1, sticky='E' + 'N')
-        #
-        # self.mainPic = tk.Label(self.frame2, image=self.pic, width=200, height=200)
-        # self.mainPic.grid(row=0, column=0)
+        self.grid(row=0, column=0, justify=tk.CENTER)
 
     def selectFilesDialogue(self):
         """
@@ -55,14 +56,14 @@ class Window:
         # Create buttons displaying all images
 
         for i in range(len(self.picturesList)):
-            self.buttonList.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
-            self.buttonList[i].configure(width=100, height=100, relief=tk.FLAT, bd=0, )
-            self.buttonList[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
+            self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
+            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0, )
+            self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
 
     def display(self, photo):
-        self.displayLabel = tk.Label(self.frame2, image = photo, relief=tk.GROOVE)
-        self.displayLabel.grid(row=0, column=0,justify = tk.CENTER)
+        tk.Label(self.frame2, image = photo, relief=tk.GROOVE)
+
 
         # command = self.display(self.picturesList[i].createThumbnail(200))
 
