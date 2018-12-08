@@ -5,6 +5,9 @@ from main_window_gui import *
 
 
 class Project:
+    """
+    An project object that contain all the information for one
+    """
 
     def __int__(self):
         self.window = Window2.__init__()
@@ -12,6 +15,7 @@ class Project:
         self.name = Window2.getProjectName()
         self.path = ''
         self.rootFolder = createNewProjectFolder(self.name, self.path)
+
 
     def getName(self):
         return self.name
@@ -75,15 +79,26 @@ def selectFilesDialogue(rootWindow):
     """
     files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
-    return selectedFiles
-
+    picturesList = []
+    for i in selectedFiles:
+        picturesList.append(i)
+    print(picturesList)
+    return picturesList
 
 def getProjectName(self):
     inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
                                               parent=self.mainWin)
     return inputProjectName
 
+#Test
+
 if __name__ == '__main__':
-    win= tk.Tk()
-    list = selectFilesDialogue(win)
-    print(list)
+    # win = tk.Tk()
+    # files = filedialog.askopenfilenames(parent=win, title='Choose a file')
+    # selectedFiles = win.tk.splitlist(files)
+    # win.mainloop()
+
+    win = tk.Tk()
+    selectFilesDialogue(win)
+
+    win.mainloop()
