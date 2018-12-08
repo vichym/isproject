@@ -40,7 +40,7 @@ class Window1:
 class Window2:
     def __init__(self):
         self.mainWin = tk.Tk()
-        self.mainWin.geometry("1250x600")
+
         # FRAME 1
         self.frame1 = tk.Frame(self.mainWin, padx=150, pady=50, highlightthickness=1, highlightbackground='black')
         self.frame1.grid(row=0, column=0, sticky='N' + 'W')
@@ -79,21 +79,67 @@ class Window2:
         self.img8 = tk.Button(self.frame1, text="+", font="Arial 32 bold", width=4, height=1, relief=tk.GROOVE)
         self.img8.grid(row=2, column=6)
 
-        self.scrollbarF1 = tk.Scrollbar(self.frame1).grid(row=0, column=7, rowspan = 3)
 
         # Frame 2
-        self.frame2 = tk.Frame(self.mainWin, padx=150, pady=64, highlightthickness=1, highlightbackground='black')
+        self.frame2 = tk.Frame(self.mainWin, padx=100, pady=15, highlightthickness=1, highlightbackground='black')
         self.frame2.grid(row=0, column=1, sticky='E' + 'N')
 
-        self.mainPic = tk.Label(self.frame2, image=self.pic, width=200, height=200)
+        self.mainPic = tk.Label(self.frame2, image=self.pic, width=300, height=300)
         self.mainPic.grid(row=0, column=0)
 
+        #Frame 3
+        self.frame3 = tk.Frame(self.mainWin, padx=176,pady=26,highlightthickness=1, highlightbackground='black')
+        self.frame3.grid(row=1,column=0,sticky= 'S'+'W')
+
+        self.filter1 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter1.grid(row=0, column=0)
+        space = tk.Label(self.frame3, width=2).grid(row=0, column=1)
+
+        self.filter2 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter2.grid(row=0, column=2)
+        space = tk.Label(self.frame3, width=2).grid(row=0, column=3)
+
+        self.filter3 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter3.grid(row=0, column=4)
+        # space = tk.Label(self.frame3, width=2).grid(row=1, column=0)
+
+        self.filter4 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter4.grid(row=2, column=0)
+        space = tk.Label(self.frame3, width=2).grid(row=2, column=1)
+
+        self.filter5 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter5.grid(row=2, column=2)
+        space = tk.Label(self.frame3, width=2).grid(row=2, column=3)
+
+        self.filter6 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter6.grid(row=2, column=4)
+        space = tk.Label(self.frame3, width=4).grid(row=2, column=5)
+
+        # use just like Entry widget (self.scaleRED.get() etc)
+        self.scaleRED = tk.Scale(self.frame3, from_=0,to_=255,orient='horizontal', label ='RED')
+        self.scaleRED.grid(row=0,column=6)
+
+        self.scaleGREEN = tk.Scale(self.frame3, from_=0, to_=255, orient='horizontal',label='GREEN')
+        self.scaleGREEN.grid(row=1, column=6)
+
+        self.scaleBLUE = tk.Scale(self.frame3, from_=0, to_=255, orient='horizontal',label='BLUE')
+        self.scaleBLUE.grid(row=2, column=6)
+
+        #Frame 4:
+        self.frame4=tk.Frame(self.mainWin, padx=150, pady=38, highlightthickness=1, highlightbackground='black')
+        self.frame4.grid(row=1,column=1,sticky='E'+'S')
+
+        plusImage = Image.open("SampleImages/PlusImage2.png")
+        self.PlusIma = ImageTk.PhotoImage(plusImage)
+        #will delete 3 lines above once we combine 2 classes (win1 and win2)
+        self.stamp=tk.Button(self.frame4, image=self.PlusIma, width=200, height=200)
+        self.stamp.grid(row=0,column=0)
 
     def run(self):
         self.mainWin.mainloop()
 
 if __name__ == '__main__':
-    myGui = Window1()
-    myGui.run()
+    # myGui = Window1()
+    # myGui.run()
     myGui = Window2()
     myGui.run()
