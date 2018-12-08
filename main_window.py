@@ -37,7 +37,7 @@ class Window:
         # --------------FRAME 2 --------------------------
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
-        self.grid(row=0, column=0, justify=tk.CENTER)
+        self.displayLabelgrid(row=0, column=0, justify=tk.CENTER)
 
     def selectFilesDialogue(self):
         """
