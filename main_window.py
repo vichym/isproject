@@ -6,6 +6,7 @@ class Window:
 
         self.picturesList = []
         self.mainWin = tk.Tk()
+        self.manipulation = {"filter": '', "stamp": {}, "colorWeight": "{}"}
 
         # Create 4 main frames
         # TODO: create frame 5 that contain 'process' button at the bottom right corner
@@ -70,6 +71,9 @@ class Window:
             # self.photo_button_List[i].bind('<Button-1>', self.display(self.picturesList[i].thumbnailForDisplay))
             # self.photo_button_List[i].configure(command = self.display(self.picturesList[i].createThumbnail(200))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
+        #
+
+
 
     def display(self, photo):
         self.displayLabel.configure(image=photo, width=200, height=photo.height())
