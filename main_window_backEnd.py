@@ -1,6 +1,6 @@
-import PIL.Image as Image
 import os
 from tkinter import filedialog, simpledialog, messagebox
+
 from main_window_gui import *
 
 
@@ -35,6 +35,7 @@ class Photo:
         newPic = ImageTk.PhotoImage(newPic)
         return newPic
 
+
 def selectFilesDialogue(rootWindow):
     """
     create a dialogue window to prompt the users to selects image files to process.
@@ -44,6 +45,7 @@ def selectFilesDialogue(rootWindow):
     files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
+
 
 def saveProject(items_List):
     """
@@ -83,10 +85,9 @@ def saveProject(items_List):
         os.startfile(folderPath)
 
 
-
 if __name__ == '__main__':
     mainWin = tk.Tk()
     mainWin.withdraw()
-    list=[]
+    list = []
     saveProject(list)
     mainWin.mainloop()

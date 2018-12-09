@@ -1,6 +1,3 @@
-import tkinter as tk
-import PIL.Image as Image
-import PIL.ImageTk as ImageTk
 from main_window_backEnd import *
 
 
@@ -11,6 +8,7 @@ class Window:
         self.mainWin = tk.Tk()
 
         # Create 4 main frames
+        # TODO: create frame 5 that contain 'process' button at the bottom right corner
         self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="white", bd=5, relief=tk.SUNKEN)
         self.frame2 = tk.Frame(self.mainWin, width=200, height=300, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=600, height=200, background="Yellow", bd=5)
@@ -38,6 +36,15 @@ class Window:
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
         self.displayLabel.grid(row=0, column=0, padx=5, pady=10)
+
+        # ====================FRAME 3==========================
+        # TODO: creates buttons for filters,
+
+        # ====================FRAME 4==========================
+        # TODO: Create a canvas, and an "Add Stamp" button under that canvas
+
+        # ====================FRAME 5==========================
+        # TODO: Create process button on the button right corner.
 
     def selectFilesDialogue(self):
         """
@@ -67,8 +74,6 @@ class Window:
     def display(self, photo):
         self.displayLabel.configure(image=photo, width=200, height=photo.height())
 
-
-
     def run(self):
         self.mainWin.mainloop()
 
@@ -97,7 +102,6 @@ def test():
     img1.grid(row=0, column=0, padx=10, pady=10)
 
     mainWin.mainloop()
-
 
 
 if __name__ == '__main__':
