@@ -24,7 +24,7 @@ class Window:
         self.frame3.grid_propagate(0)
         self.frame4.grid_propagate(0)
 
-        # --------------FRAME 1-------------------------
+        # ====================FRAME 1======================
         # ---List containing small photos in frame 1---
         self.photo_button_List = []
 
@@ -34,9 +34,10 @@ class Window:
                                         command=self.selectFilesDialogue)
         self.addPhotoButton.grid(row=0, column=0, padx=10, pady=10)
 
-        # --------------FRAME 2 --------------------------
+        # ====================FRAME 2 ========================
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
+        self.displayLabel.grid(row=0, column=0, padx=5, pady=10)
 
     def selectFilesDialogue(self):
         """
@@ -56,21 +57,23 @@ class Window:
 
         for i in range(len(self.picturesList)):
             self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
-            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0,
-                                                command=self.display(self.picturesList[i].createThumbnail(200)))
+            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
+
+            # TODO: assign each Button to self.display() to display specific picture on frame 2.
+            # self.photo_button_List[i].bind('<Button-1>', self.display(self.picturesList[i].thumbnailForDisplay))
+            # self.photo_button_List[i].configure(command = self.display(self.picturesList[i].createThumbnail(200))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
     def display(self, photo):
-        tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
-        self.displayLabel.pack(anchor=tk.CENTER)
+        self.displayLabel.configure(image=photo, width=200, height=photo.height())
 
-        # command = self.display(self.picturesList[i].createThumbnail(200))
+
 
     def run(self):
         self.mainWin.mainloop()
 
 
-def version():
+def test():
     mainWin = tk.Tk()
     mainWin.geometry('800x500')
 
@@ -95,9 +98,6 @@ def version():
 
     mainWin.mainloop()
 
-
-def test():
-    pass
 
 
 if __name__ == '__main__':
