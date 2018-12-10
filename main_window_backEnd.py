@@ -1,28 +1,7 @@
-
-import PIL.Image as Image
 import os
-from tkinter import filedialog, simpledialog
+from tkinter import filedialog, simpledialog, messagebox
+
 from main_window_gui import *
-
-
-class Project:
-    """
-    An project object that contain all the information for one
-    """
-
-    def __int__(self):
-        self.window = Window2.__init__()
-        self.imagesList = selectFilesDialogue(self.window)
-        self.name = Window2.getProjectName()
-        self.path = ''
-        self.rootFolder = createNewProjectFolder(self.name, self.path)
-
-
-    def getName(self):
-        return self.name
-
-    def setName(self, newName):
-        self.name = newName
 
 
 class Photo:
@@ -32,63 +11,27 @@ class Photo:
 
     def __init__(self, *args):
         self.image = Image.open(args[0])
-        self.thumbnailsList = {}
         self.thumbnailForButton = self.createThumbnail(100)
+        self.thumbnailForDisplay = self.createThumbnail(200)
 
-    def createThumbnail(self, max):
+    def createThumbnail(self, maxSideLength):
         w, h = self.image.size
 
-        print(w , h)
+        print(w, h)
         if w > h:
-            newW = max
+            newW = maxSideLength
             newH = int(h * newW / w)
-            print("newW:", newW, "newH: ", newH )
-        elif w<h:
-            newH = max
+        elif w < h:
+            newH = maxSideLength
             newW = int(w * newH / h)
-            print("newH: ", newH, "newW:", newW)
         else:
-            newW=max
-            newH=max
-        name = (newW, newH)
+            newW = maxSideLength
+            newH = maxSideLength
         newPic = self.image.copy()
         newPic.thumbnail((newW, newH))
-
-        # covert to TmageTK object to be used with tkinter button widget
+        # covert to ImageTK object to be used with tkinter button widget
         newPic = ImageTk.PhotoImage(newPic)
-
-        self.thumbnailsList[name] = newPic
         return newPic
-
-
-    def getThumlist(self):
-        return self.thumbnailsList
-
-
-def createThumbnails(pic, w, h):
-    """
-    Create a thumnails with specified width and height of a picture.
-        :param pic: (Image)
-        :param w: (int)
-        :param h: (int)
-        :return: (Thumnail)
-    """
-    newPic = pic.copy()
-    newPic.thumbnail((w, h))
-    return newPic
-
-
-def createNewProjectFolder(name, path):
-    """
-    Creates new folder for a new project where final project is store if there is no project folder exist
-        :param name: <string> the name of the new folder.
-        :param path: <string> directory path
-        :return: void
-    """
-    newPath = path + '\{}'.format(name)
-    if not os.path.exists(newPath):
-        os.mkdir(newPath)
-    return newPath
 
 
 def selectFilesDialogue(rootWindow):
@@ -101,18 +44,48 @@ def selectFilesDialogue(rootWindow):
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
 
-def getProjectName(self):
-    inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
-                                              parent=self.mainWin)
-    return inputProjectName
 
-#Test
+def saveProject(items_List):
+    """
+    This function will take a list of Images and save to disk. This function includes
+        + asking for project name
+        + Creating new folder
+        + saving items
+    :param list: <List> a list of Images
+    :return: <void>
+    """
+
+    # Asking dialogue for the folder name
+    inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
+                                              parent=mainWin)
+
+    # Prompt to choose location
+    folderPath = filedialog.askdirectory() + '\{}'.format(inputProjectName)
+
+    # Make a new folder "name"
+    try:
+        os.mkdir(folderPath)
+    except FileExistsError:
+        # Error message
+        messagebox.showinfo("Folder Already Exists", "The Folder you are trying to created already exist")
+        saveProject(items_List)
+
+    # Save items in the list to the new folder
+    for item in items_List:
+        os.path.join(folderPath, item)
+
+    # Ask of the users want to view the folder
+    viewFolder = messagebox.askyesno("Save Completed!",
+                                     "Your data has been saved to \{}. Do you want to view the folder?"
+                                     .format(folderPath))
+    # View newly created Folder
+    if viewFolder:
+        os.startfile(folderPath)
+
 
 if __name__ == '__main__':
-    win = tk.Tk()
-    files = filedialog.askopenfilenames(parent=win, title='Choose a file')
-    selectedFiles = win.tk.splitlist(files)
-    win.mainloop()
-
-
-
+    mainWin = tk.Tk()
+    mainWin.withdraw()
+    list = []
+    saveProject(list)
+    mainWin.mainloop()

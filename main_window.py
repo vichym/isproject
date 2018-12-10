@@ -1,6 +1,3 @@
-import tkinter as tk
-import PIL.Image as Image
-import PIL.ImageTk as ImageTk
 from main_window_backEnd import *
 
 
@@ -9,8 +6,10 @@ class Window:
 
         self.picturesList = []
         self.mainWin = tk.Tk()
+        self.manipulation = {"filter": '', "stamp": {}, "colorWeight": "{}"}
 
         # Create 4 main frames
+        # TODO: create frame 5 that contain 'process' button at the bottom right corner
         self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="white", bd=5, relief=tk.SUNKEN)
         self.frame2 = tk.Frame(self.mainWin, width=200, height=300, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=600, height=200, background="Yellow", bd=5)
@@ -24,7 +23,7 @@ class Window:
         self.frame3.grid_propagate(0)
         self.frame4.grid_propagate(0)
 
-        # --------------FRAME 1-------------------------
+        # ====================FRAME 1======================
         # ---List containing small photos in frame 1---
         self.photo_button_List = []
 
@@ -34,9 +33,13 @@ class Window:
                                         command=self.selectFilesDialogue)
         self.addPhotoButton.grid(row=0, column=0, padx=10, pady=10)
 
-        # --------------FRAME 2 --------------------------
+        # ====================FRAME 2 ========================
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
+        self.displayLabel.grid(row=0, column=0, padx=5, pady=10)
+
+        # ====================FRAME 3==========================
+        # TODO: creates buttons for filters,
 
         #---------------FRAME 3 --------------------------
         # 6 filters:
@@ -45,6 +48,11 @@ class Window:
 
         self.filter1 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.filter1.grid(row=0, column=0, padx=5,pady=5)
+        # ====================FRAME 4==========================
+        # TODO: Create a canvas, and an "Add Stamp" button under that canvas
+
+        # ====================FRAME 5==========================
+        # TODO: Create process button on the button right corner.
 
         self.filter2 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.filter2.grid(row=0, column=2, padx=5,pady=5)
@@ -66,37 +74,36 @@ class Window:
             :param rootWindow: (window) the root window
             :return: (list) list of the path to the selected files
         """
-        # Diaglogue window to select files
+        # Dialogue windows to select files
         files_Path = filedialog.askopenfilenames(parent=self.mainWin, title='Choose a file')
         selected_Files = self.mainWin.tk.splitlist(files_Path)
 
-        # Need to assign all the images into a self.pictureList so that python garbage collector won't wipe data.
+        # Need to assign all the images into a self.pictureList before recalling so that python garbage collector won't
+        # wipe data.
         for j in selected_Files:
             self.picturesList.append(Photo(j))  # Photo object that contain an image file and
 
-        # Create buttons displaying all images
+        # Create buttons list displaying all images
+        self.photo_button_List.clear()
 
+        # Create Photo Button
         for i in range(len(self.picturesList)):
             self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
-            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0,
-                                                command=self.display(self.picturesList[i].createThumbnail(200)))
+            self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
+
+            # TODO: assign each Button to self.display() to display specific picture on frame 2.
+            # self.photo_button_List[i].bind('<Button-1>', self.display(self.picturesList[i].thumbnailForDisplay))
+            # self.photo_button_List[i].configure(command = self.display(self.picturesList[i].createThumbnail(200))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
 
-
     def display(self, photo):
-        tk.Label(self.frame2, image=photo, relief=tk.GROOVE)
-        self.displayLabel.pack(anchor=tk.CENTER)
-
-
-        # command = self.display(self.picturesList[i].createThumbnail(200))
-
-
+        self.displayLabel.configure(image=photo, width=200, height=photo.height())
 
     def run(self):
         self.mainWin.mainloop()
 
 
-def version():
+def test():
     mainWin = tk.Tk()
     mainWin.geometry('800x500')
 
@@ -120,10 +127,6 @@ def version():
     img1.grid(row=0, column=0, padx=10, pady=10)
 
     mainWin.mainloop()
-
-
-def test():
-    pass
 
 
 if __name__ == '__main__':
