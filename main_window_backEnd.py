@@ -1,5 +1,6 @@
 import os
 from tkinter import filedialog, simpledialog, messagebox
+from PIL import ImageFilter
 
 from main_window_gui import *
 

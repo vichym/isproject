@@ -41,33 +41,52 @@ class Window:
         # ====================FRAME 3==========================
         # TODO: creates buttons for filters,
 
-        #---------------FRAME 3 --------------------------
         # 6 filters:
         pic = Image.open("download.jpg")
         self.pic = ImageTk.PhotoImage(pic)
 
-        self.filter1 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter1.grid(row=0, column=0, padx=5,pady=5)
+        # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
+        self.blur = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.blur.grid(row=0, column=0, padx=5, pady=5)
+        # self.blur.config(command=self.ADD_BLUR_FUNCTION)
+
+        self.contour = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.contour.grid(row=0, column=2, padx=5, pady=5)
+        # self.contour.config(command=self.ADD)
+
+        self.edgeEnhance = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.edgeEnhance.grid(row=0, column=4, padx=5, pady=5)
+        # self.edgeEnhance.config(command=self.ADD)
+
+        self.emboss = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.emboss.grid(row=2, column=0, padx=5, pady=5)
+        # self.emboss.config(command=self.ADD)
+
+        self.sharpen = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.sharpen.grid(row=2, column=2, padx=5, pady=5)
+        # self.sharpen.config(command=self.ADD)
+
+        self.smooth = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.smooth.grid(row=2, column=4, padx=5, pady=5)
+        # self.smooth.config(command=self.ADD)
+
+        # the 3 scale widgets
+        self.scaleRED = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='red',label='Red')
+        self.scaleRED.grid(row=0, column=6, padx=10,rowspan=3)
+
+        self.scaleGREEN = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='green',label='Green')
+        self.scaleGREEN.grid(row=0, column=7,padx=10,rowspan=3)
+
+        self.scaleBLUE = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='blue',label='Blue')
+        self.scaleBLUE.grid(row=0, column=8,padx=10,rowspan=3)
         # ====================FRAME 4==========================
         # TODO: Create a canvas, and an "Add Stamp" button under that canvas
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
+        self.processButton=tk.Button(self.frame4,text='Proceed', font='Arial 14 bold')
+        # self.processButton.grid(row=1,column=1,sticky='SE')
 
-        self.filter2 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter2.grid(row=0, column=2, padx=5,pady=5)
-
-        self.filter3 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter3.grid(row=0, column=4, padx=5,pady=5)
-
-        self.filter4 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter4.grid(row=2, column=0, padx=5,pady=5)
-
-        self.filter5 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter5.grid(row=2, column=2, padx=5,pady=5)
-
-        self.filter6 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter6.grid(row=2, column=4, padx=5,pady=5)
     def selectFilesDialogue(self):
         """
         create a dialogue window to prompt the users to selects image files to process.
