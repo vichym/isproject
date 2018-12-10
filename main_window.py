@@ -10,10 +10,10 @@ class Window:
 
         # Create 4 main frames
         # TODO: create frame 5 that contain 'process' button at the bottom right corner
-        self.frame1 = tk.Frame(self.mainWin, width=600, height=300, background="white", bd=5, relief=tk.SUNKEN)
-        self.frame2 = tk.Frame(self.mainWin, width=200, height=300, background="blue", bd=5, relief=tk.GROOVE)
-        self.frame3 = tk.Frame(self.mainWin, width=600, height=200, background="Yellow", bd=5)
-        self.frame4 = tk.Frame(self.mainWin, width=200, height=200, background="green", bd=5)
+        self.frame1 = tk.Frame(self.mainWin, width=700, height=350, background="white", bd=5, relief=tk.SUNKEN)
+        self.frame2 = tk.Frame(self.mainWin, width=230, height=350, background="blue", bd=5, relief=tk.GROOVE)
+        self.frame3 = tk.Frame(self.mainWin, width=700, height=200, background="Yellow", bd=5)
+        self.frame4 = tk.Frame(self.mainWin, width=230, height=200, background="green", bd=5)
         self.frame1.grid(row=0, column=0)
         self.frame2.grid(row=0, column=1)
         self.frame3.grid(row=1, column=0)
@@ -36,7 +36,8 @@ class Window:
         # ====================FRAME 2 ========================
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
-        self.displayLabel.grid(row=0, column=0, padx=5, pady=10)
+
+        self.displayLabel.grid_forget()
 
         # ====================FRAME 3==========================
         # TODO: creates buttons for filters,
@@ -84,7 +85,7 @@ class Window:
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
-        self.processButton=tk.Button(self.frame4,text='Proceed', font='Arial 14 bold')
+        self.processButton = tk.Button(self.frame4, text='Proceed', font='Arial 14 bold')
         self.processButton.grid(row=1,column=1,sticky='SE') #will make sense when frame4 is complete lol
 
     def selectFilesDialogue(self):
@@ -109,14 +110,17 @@ class Window:
         for i in range(len(self.picturesList)):
             self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
             self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
+            self.photo_button_List[i].grid(row=i // 5, column=i % 5 + 1, padx=5, pady=5)
 
             # TODO: assign each Button to self.display() to display specific picture on frame 2.
-            # self.photo_button_List[i].bind('<Button-1>', self.display(self.picturesList[i].thumbnailForDisplay))
-            # self.photo_button_List[i].configure(command = self.display(self.picturesList[i].createThumbnail(200))
-            self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
+            # Displaying different object by passing parameters to a function
+            # Citation:
+            self.photo_button_List[i].configure(
+                command=lambda x=self.picturesList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
         self.displayLabel.configure(image=photo, width=200, height=photo.height())
+        self.displayLabel.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
     def run(self):
         self.mainWin.mainloop()
