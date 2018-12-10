@@ -21,11 +21,9 @@ class Photo:
         if w > h:
             newW = maxSideLength
             newH = int(h * newW / w)
-            print("newW:", newW, "newH: ", newH)
         elif w < h:
             newH = maxSideLength
             newW = int(w * newH / h)
-            print("newH: ", newH, "newW:", newW)
         else:
             newW = maxSideLength
             newH = maxSideLength

@@ -53,16 +53,19 @@ class Window:
             :param rootWindow: (window) the root window
             :return: (list) list of the path to the selected files
         """
-        # Diaglogue window to select files
+        # Dialogue windows to select files
         files_Path = filedialog.askopenfilenames(parent=self.mainWin, title='Choose a file')
         selected_Files = self.mainWin.tk.splitlist(files_Path)
 
-        # Need to assign all the images into a self.pictureList so that python garbage collector won't wipe data.
+        # Need to assign all the images into a self.pictureList before recalling so that python garbage collector won't
+        # wipe data.
         for j in selected_Files:
             self.picturesList.append(Photo(j))  # Photo object that contain an image file and
 
-        # Create buttons displaying all images
+        # Create buttons list displaying all images
+        self.photo_button_List.clear()
 
+        # Create Photo Button
         for i in range(len(self.picturesList)):
             self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
             self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
@@ -71,9 +74,6 @@ class Window:
             # self.photo_button_List[i].bind('<Button-1>', self.display(self.picturesList[i].thumbnailForDisplay))
             # self.photo_button_List[i].configure(command = self.display(self.picturesList[i].createThumbnail(200))
             self.photo_button_List[i].grid(row=i // 3, column=i % 3 + 1, padx=5, pady=5)
-        #
-
-
 
     def display(self, photo):
         self.displayLabel.configure(image=photo, width=200, height=photo.height())
