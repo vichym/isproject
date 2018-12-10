@@ -1,5 +1,4 @@
 import os
-from PIL import ImageFilter
 from tkinter import filedialog, simpledialog, messagebox
 
 from main_window_gui import *
@@ -50,7 +49,7 @@ def selectFilesDialogue(rootWindow):
     return selectedFiles
 
 
-def saveProject(items_List):
+def saveProject(items_List, mainWin):
     """
     This function will take a list of Images and save to disk. This function includes
         + asking for project name
@@ -88,13 +87,17 @@ def saveProject(items_List):
         os.startfile(folderPath)
 
 
-def test():
-    photo0 = Image.open("arches.jpg")
-    photo0.show()
+def stamp(ratio):
+    photo0 = Image.open("astilbe.jpg")
+    w, h = photo0.size
+    lw = w * ratio
+    lh = h * ratio
     photo = photo0.copy()
-    watermark = Image.open("SampleImages/ImageFile.png")
-    watermark.show()
-    photo.paste(watermark, (5, 5), watermark)
+    watermark = Image.open("ll.png").copy()
+
+    watermark.thumbnail((lw, lh), Image.ANTIALIAS)
+
+    photo.paste(watermark, (int(w - w * ratio - lw), int(h - ratio * h)), watermark)
     photo.show()
 
 
@@ -105,4 +108,4 @@ if __name__ == '__main__':
     # saveProject(list)
     # mainWin.mainloop()
 
-    test()
+    stamp(0.1)
