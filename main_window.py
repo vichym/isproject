@@ -85,7 +85,7 @@ class Window:
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
         self.processButton=tk.Button(self.frame4,text='Proceed', font='Arial 14 bold')
-        # self.processButton.grid(row=1,column=1,sticky='SE')
+        self.processButton.grid(row=1,column=1,sticky='SE') #will make sense when frame4 is complete lol
 
     def selectFilesDialogue(self):
         """
