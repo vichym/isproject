@@ -38,7 +38,28 @@ class Window:
         # Label of displaying selected picture
         self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
 
+        #---------------FRAME 3 --------------------------
+        # 6 filters:
+        pic = Image.open("download.jpg")
+        self.pic = ImageTk.PhotoImage(pic)
 
+        self.filter1 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter1.grid(row=0, column=0, padx=5,pady=5)
+
+        self.filter2 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter2.grid(row=0, column=2, padx=5,pady=5)
+
+        self.filter3 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter3.grid(row=0, column=4, padx=5,pady=5)
+
+        self.filter4 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter4.grid(row=2, column=0, padx=5,pady=5)
+
+        self.filter5 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter5.grid(row=2, column=2, padx=5,pady=5)
+
+        self.filter6 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.filter6.grid(row=2, column=4, padx=5,pady=5)
     def selectFilesDialogue(self):
         """
         create a dialogue window to prompt the users to selects image files to process.

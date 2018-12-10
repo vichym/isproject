@@ -92,28 +92,22 @@ class Window2:
         self.frame3.grid(row=1,column=0,sticky= 'S'+'W')
 
         self.filter1 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter1.grid(row=0, column=0)
-        space = tk.Label(self.frame3, width=2).grid(row=0, column=1)
+        self.filter1.grid(row=0, column=0, padx=5)
 
         self.filter2 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter2.grid(row=0, column=2)
-        space = tk.Label(self.frame3, width=2).grid(row=0, column=3)
+        self.filter2.grid(row=0, column=2,padx=5)
 
         self.filter3 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter3.grid(row=0, column=4)
-        # space = tk.Label(self.frame3, width=2).grid(row=1, column=0)
+        self.filter3.grid(row=0, column=4,padx=5)
 
         self.filter4 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter4.grid(row=2, column=0)
-        space = tk.Label(self.frame3, width=2).grid(row=2, column=1)
+        self.filter4.grid(row=2, column=0,padx=5)
 
         self.filter5 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter5.grid(row=2, column=2)
-        space = tk.Label(self.frame3, width=2).grid(row=2, column=3)
+        self.filter5.grid(row=2, column=2,padx=5)
 
         self.filter6 = tk.Button(self.frame3, image=self.pic, width=80, height=80)
-        self.filter6.grid(row=2, column=4)
-        space = tk.Label(self.frame3, width=4).grid(row=2, column=5)
+        self.filter6.grid(row=2, column=4,padx=5)
 
         # use just like Entry widget (self.scaleRED.get() etc.)
         self.scaleRED = tk.Scale(self.frame3, from_=0,to_=255,orient='horizontal', label ='RED')
