@@ -1,6 +1,6 @@
 import os
-from tkinter import filedialog, simpledialog, messagebox
 from PIL import ImageFilter
+from tkinter import filedialog, simpledialog, messagebox
 
 from main_window_gui import *
 
@@ -16,9 +16,13 @@ class Photo:
         self.thumbnailForDisplay = self.createThumbnail(200)
 
     def createThumbnail(self, maxSideLength):
+        """
+        Create a thumbnail that fits the maximum side length of maxSideLength
+        :param maxSideLength: the maximum length of the container
+        :return: Image
+        """
         w, h = self.image.size
 
-        print(w, h)
         if w > h:
             newW = maxSideLength
             newH = int(h * newW / w)
@@ -52,7 +56,7 @@ def saveProject(items_List):
         + asking for project name
         + Creating new folder
         + saving items
-    :param list: <List> a list of Images
+    :param items_List: <List> a list of Images
     :return: <void>
     """
 
@@ -84,9 +88,21 @@ def saveProject(items_List):
         os.startfile(folderPath)
 
 
+def test():
+    photo0 = Image.open("arches.jpg")
+    photo0.show()
+    photo = photo0.copy()
+    watermark = Image.open("SampleImages/ImageFile.png")
+    watermark.show()
+    photo.paste(watermark, (5, 5), watermark)
+    photo.show()
+
+
 if __name__ == '__main__':
-    mainWin = tk.Tk()
-    mainWin.withdraw()
-    list = []
-    saveProject(list)
-    mainWin.mainloop()
+    # mainWin = tk.Tk()
+    # mainWin.withdraw()
+    # list = []
+    # saveProject(list)
+    # mainWin.mainloop()
+
+    test()
