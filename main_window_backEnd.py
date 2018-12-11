@@ -105,6 +105,21 @@ def stampForView(image, ratio, stampPNG):
     return photo
 
 
+def manipulate(dict, photoList):
+    if dict["filter"] is not None:
+        for pic in photoList:
+            # TODO: code for applying filter
+            pass
+    elif dict['stamp'] is not None:
+        for pic in photoList:
+            # TODO: code for applying stamp
+            pass
+    elif dict['colorWeight'] is not None:
+        for pic in photoList:
+            # TODO: code for manipulating color
+            pass
+
+
 def Test(ratio):
     photo0 = Image.open("astilbe.jpg")
     w, h = photo0.size

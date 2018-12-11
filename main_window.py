@@ -4,40 +4,45 @@ from main_window_backEnd import *
 class Window:
     def __init__(self):
 
-        self.picturesList = []
+        self.photosList = []
+        self.stampPic = None
         self.mainWin = tk.Tk()
         self.manipulation = {"filter": '', "stamp": {}, "colorWeight": "{}"}
 
         # Create 4 main frames
         # TODO: create frame 5 that contain 'process' button at the bottom right corner
         self.frame1 = tk.Frame(self.mainWin, width=700, height=350, background="white", bd=5, relief=tk.SUNKEN)
-        self.frame2 = tk.Frame(self.mainWin, width=230, height=350, background="blue", bd=5, relief=tk.GROOVE)
+        self.frame2 = tk.Frame(self.mainWin, width=220, height=350, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=700, height=200, background="Yellow", bd=5)
-        self.frame4 = tk.Frame(self.mainWin, width=230, height=200, background="green", bd=5)
+        self.frame4 = tk.Frame(self.mainWin, width=220, height=200, background="green", bd=5)
+        self.frame5 = tk.Frame(self.mainWin, bd=5)
         self.frame1.grid(row=0, column=0)
         self.frame2.grid(row=0, column=1)
         self.frame3.grid(row=1, column=0)
         self.frame4.grid(row=1, column=1)
+        self.frame5.grid(row=2, column=1)
+
         self.frame1.grid_propagate(0)
         self.frame2.grid_propagate(0)
         self.frame3.grid_propagate(0)
         self.frame4.grid_propagate(0)
+        self.frame5.grid_propagate(0)
 
         # ====================FRAME 1======================
         # ---List containing small photos in frame 1---
         self.photo_button_List = []
 
         # ----Add Photo Button----
-        self.addPhotoButton = tk.Button(self.frame1, text="+", font="Arial 32 bold",
-                                        height=1, width=3, relief=tk.RIDGE,
-                                        command=self.selectFilesDialogue)
-        self.addPhotoButton.grid(row=0, column=0, padx=10, pady=10)
+        self.addPhoto_Button = tk.Button(self.frame1, text="+", font="Arial 32 bold",
+                                         height=1, width=3, relief=tk.RIDGE,
+                                         command=self.selectFilesDialogue)
+        self.addPhoto_Button.grid(row=0, column=0, padx=10, pady=10)
 
         # ====================FRAME 2 ========================
         # Label of displaying selected picture
-        self.displayLabel = tk.Label(self.frame2, relief=tk.GROOVE)
+        self.display_Label = tk.Label(self.frame2, relief=tk.GROOVE)
 
-        self.displayLabel.grid_forget()
+        self.display_Label.grid_forget()
 
         # ====================FRAME 3==========================
         # TODO: creates buttons for filters,
@@ -49,15 +54,15 @@ class Window:
         # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
         self.blur = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.blur.grid(row=0, column=0, padx=5, pady=5)
-        # self.blur.config(command=self.ADD_BLUR_FUNCTION)
+        # self.blur.config(command=self.assignFilter("Blur"))
 
         self.contour = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.contour.grid(row=0, column=2, padx=5, pady=5)
-        # self.contour.config(command=self.ADD)
+        # self.contour.config(command=self.assignFilter("Contour"))
 
         self.edgeEnhance = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.edgeEnhance.grid(row=0, column=4, padx=5, pady=5)
-        # self.edgeEnhance.config(command=self.ADD)
+        # self.edgeEnhance.config(command=self.assignFilter("Enhance Edge"))
 
         self.emboss = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.emboss.grid(row=2, column=0, padx=5, pady=5)
@@ -72,21 +77,33 @@ class Window:
         # self.smooth.config(command=self.ADD)
 
         # the 3 scale widgets
-        self.scaleRED = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='red',label='Red')
+        self.scaleRED = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='red', label='Red')
         self.scaleRED.grid(row=0, column=6, padx=10,rowspan=3)
 
-        self.scaleGREEN = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='green',label='Green')
+        self.scaleGREEN = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='green',
+                                   label='Green')
         self.scaleGREEN.grid(row=0, column=7,padx=10,rowspan=3)
 
-        self.scaleBLUE = tk.Scale(self.frame3, from_=0, to_=255, orient='vertical',activebackground='blue',label='Blue')
+        self.scaleBLUE = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='blue',
+                                  label='Blue')
         self.scaleBLUE.grid(row=0, column=8,padx=10,rowspan=3)
+
         # ====================FRAME 4==========================
         # TODO: Create a canvas, and an "Add Stamp" button under that canvas
+        self.displayStamp_Label = tk.Label(self.frame4, relief=tk.GROOVE)
+        self.displayStamp_Label.configure(width=200, height=150, image=self.pic)
+        self.displayStamp_Label.grid(padx=5, pady=10)
+
+        self.addStamp_Button = tk.Button(self.frame4, text="Add Logo", command=self.loadStampPic)
+        self.addStamp_Button.grid()
+
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
-        self.processButton = tk.Button(self.frame4, text='Proceed', font='Arial 14 bold')
-        self.processButton.grid(row=1,column=1,sticky='SE') #will make sense when frame4 is complete lol
+        self.processButton = tk.Button(self.frame5, text='Proceed', font='Arial 9 bold')
+        self.processButton.pack(side="right")
+
+
 
     def selectFilesDialogue(self):
         """
@@ -101,14 +118,14 @@ class Window:
         # Need to assign all the images into a self.pictureList before recalling so that python garbage collector won't
         # wipe data.
         for j in selected_Files:
-            self.picturesList.append(Photo(j))  # Photo object that contain an image file and
+            self.photosList.append(Photo(j))  # Photo object that contain an image file and
 
         # Create buttons list displaying all images
         self.photo_button_List.clear()
 
         # Create Photo Button
-        for i in range(len(self.picturesList)):
-            self.photo_button_List.append(tk.Button(self.frame1, image=self.picturesList[i].thumbnailForButton))
+        for i in range(len(self.photosList)):
+            self.photo_button_List.append(tk.Button(self.frame1, image=self.photosList[i].thumbnailForButton))
             self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
             self.photo_button_List[i].grid(row=i // 5, column=i % 5 + 1, padx=5, pady=5)
 
@@ -116,11 +133,25 @@ class Window:
             # Displaying different object by passing parameters to a function
             # Citation:
             self.photo_button_List[i].configure(
-                command=lambda x=self.picturesList[i].thumbnailForDisplay: self.display(x))
+                command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
-        self.displayLabel.configure(image=photo, width=200, height=photo.height())
-        self.displayLabel.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
+        self.display_Label.configure(image=photo, width=200, height=photo.height())
+        self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
+
+    def assignFilter(self, filter):
+        self.manipulation["filter"] = filter
+
+    def assignStamp(self):
+        # TODO: assign the stamp image to the self.manipulation dict
+        pass
+
+    def loadStampPic(self):
+        file = filedialog.askopenfile(filetypes=[("PNG files", "*.png")])
+        self.stampPic = Image.open(file)
+        self.manipulation["stamp"] = self.stampPic
+        self.displayStamp_Label.configure(image=self.stampPic)
+
 
     def run(self):
         self.mainWin.mainloop()

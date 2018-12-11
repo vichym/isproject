@@ -1,4 +1,5 @@
 import tkinter as tk
+
 import PIL.Image as Image
 import PIL.ImageTk as ImageTk
 
@@ -119,13 +120,14 @@ class Window2:
         self.scaleBLUE = tk.Scale(self.frame3, from_=0, to_=255, orient='horizontal',label='BLUE')
         self.scaleBLUE.grid(row=2, column=6)
 
-        #Frame 4:
+        # Frame 4:
         self.frame4=tk.Frame(self.mainWin, padx=150, pady=38, highlightthickness=1, highlightbackground='black')
         self.frame4.grid(row=1,column=1,sticky='E'+'S')
 
         plusImage = Image.open("SampleImages/PlusImage2.png")
         self.PlusIma = ImageTk.PhotoImage(plusImage)
-        #will delete 3 lines above once we combine 2 classes (win1 and win2)
+
+        # will delete 3 lines above once we combine 2 classes (win1 and win2)
         self.stamp=tk.Button(self.frame4, image=self.PlusIma, width=200, height=200)
         self.stamp.grid(row=0,column=0)
 
