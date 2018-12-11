@@ -148,7 +148,7 @@ class Window:
 
     def loadStampPic(self):
         file = filedialog.askopenfile(filetypes=[("PNG files", "*.png")])
-        self.stampPic = Image.open(file)
+        self.stampPic = Image.open(file,"r")
         self.manipulation["stamp"] = self.stampPic
         self.displayStamp_Label.configure(image=self.stampPic)
 
