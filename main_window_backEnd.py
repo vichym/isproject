@@ -87,7 +87,25 @@ def saveProject(items_List, mainWin):
         os.startfile(folderPath)
 
 
-def stamp(ratio):
+def stampForView(image, ratio, stampPNG):
+    """
+    This function resize the stampPNG to the specify ratio to the target image and stamp.
+    :param image: Target Image
+    :param ratio: 0<ratio<1
+    :param stampPNG: PNG image that have transparent background
+    :return: Image
+    """
+
+    w, h = image.size
+    lw = w * ratio
+    lh = h * ratio
+    photo = image.copy()
+    stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
+    photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
+    return photo
+
+
+def Test(ratio):
     photo0 = Image.open("astilbe.jpg")
     w, h = photo0.size
     lw = w * ratio
