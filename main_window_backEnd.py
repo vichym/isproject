@@ -82,8 +82,8 @@ def stampForReal(image, ratio, stampPNG):
     lw = w * ratio
     lh = h * ratio
     photo = image.copy()
-    stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
-    photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
+    stampPNG.thumbnail((lw, lh), Image.NEAREST)
+    photo.paste(stampPNG, (int(w - h * ratio - lw), int(h - ratio * h)), stampPNG)
     return photo
 
 

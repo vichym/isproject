@@ -85,15 +85,15 @@ class Window:
 
         # the 3 scale widgets
         self.scaleRED = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='red', label='Red')
-        self.scaleRED.grid(row=0, column=6, padx=10,rowspan=3)
+        self.scaleRED.grid(row=0, column=6, padx=10, rowspan=3)
 
         self.scaleGREEN = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='green',
                                    label='Green')
-        self.scaleGREEN.grid(row=0, column=7,padx=10,rowspan=3)
+        self.scaleGREEN.grid(row=0, column=7, padx=10, rowspan=3)
 
         self.scaleBLUE = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='blue',
                                   label='Blue')
-        self.scaleBLUE.grid(row=0, column=8,padx=10,rowspan=3)
+        self.scaleBLUE.grid(row=0, column=8, padx=10, rowspan=3)
 
         # ====================FRAME 4==========================
         # TODO: Create a canvas, and an "Add Stamp" button under that canvas
@@ -103,7 +103,6 @@ class Window:
 
         self.addStamp_Button = tk.Button(self.frame4, text="Add Logo", command=self.loadStampPic)
         self.addStamp_Button.grid()
-
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
@@ -136,7 +135,8 @@ class Window:
 
             # Displaying different object by passing parameters to a function
             # Citation:
-            self.photo_button_List[i].configure(command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
+            self.photo_button_List[i].configure(
+                command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
         self.display_Label.configure(image=photo, width=200, height=photo.height())
@@ -192,7 +192,6 @@ class Window:
                 stampForReal(self.photosList[i].image, 0.2, self.stampPic.image))
         self.saveProject(self.processPhoto_list)
 
-
     def saveProject(self, items_List):
         """
         This function will take a list of Images and save to disk. This function includes
@@ -213,15 +212,11 @@ class Window:
         # Make a new folder "name"
         try:
             os.mkdir(folderPath)
-            cnt=0
+            cnt = 0
             for item in items_List:
-                print('a')
-                cnt+=1
-                # os.path.join(folderPath, '{}.jpeg'.format(item))
-                # print(type(item))
+                cnt += 1
+                item.save(folderPath + "\{}.jpg".format(cnt))
 
-                item.save(folderPath+"\{}.jpg".format(cnt))
-                print(folderPath+'\{}.jpg'.format(cnt))
                 # Ask of the users want to view the folder
             viewFolder = messagebox.askyesno("Save Completed!",
                                              "Your data has been saved to \{}. Do you want to view the folder?"
