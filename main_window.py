@@ -1,14 +1,15 @@
 import os
 import tkinter as tk
 from tkinter import simpledialog, messagebox
+
 from PIL import ImageFilter
-from PIL import Image
+
 from main_window_backEnd import *
 
 
 class Window:
     def __init__(self):
-
+        pic = Image.open('download.jpg')
         self.processPhoto_list = []
         self.photosList = []
         self.stampPic = None
@@ -54,7 +55,7 @@ class Window:
         # TODO: creates buttons for filters,
 
         # 6 filters:
-        pic = Image.open('download.jpg')
+
         self.pic = ImageTk.PhotoImage(pic)
 
         # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html

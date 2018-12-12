@@ -1,6 +1,6 @@
-from tkinter import filedialog, Image
+from tkinter import filedialog
 
-from PIL import ImageTk
+from PIL import ImageTk, Image
 
 
 class Photo:
@@ -103,7 +103,7 @@ def stampForReal(image, ratio, stampPNG):
 #     photo.show()
 
 
-# if __name__ == '__main__':
+if __name__ == '__main__':
     # mainWin = tk.Tk()
     # mainWin.withdraw()
     # list = []
@@ -112,5 +112,5 @@ def stampForReal(image, ratio, stampPNG):
 
     # Test(0.1)
     #
-    # files = filedialog.askopenfilename(title='Choose a file')
-    # Image.open(files).show()
+    files = filedialog.askopenfilename(title='Choose a file')
+    Image.open(files).show()
