@@ -1,9 +1,13 @@
+import os
+from tkinter import simpledialog, messagebox
+
 from main_window_backEnd import *
 
 
 class Window:
     def __init__(self):
 
+        self.processPhoto_list = []
         self.photosList = []
         self.stampPic = None
         self.mainWin = tk.Tk()
@@ -100,7 +104,7 @@ class Window:
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
-        self.processButton = tk.Button(self.frame5, text='Proceed', font='Arial 9 bold')
+        self.processButton = tk.Button(self.frame5, text='Proceed', font='Arial 9 bold', command=self.manipulate)
         self.processButton.pack(side="right")
 
     def selectFilesDialogue(self):
@@ -155,29 +159,80 @@ class Window:
             self.manipulation["stamp"] = self.stampPic.image
             self.stampPic.stamp = self.stampPic.createThumbnail(200)
             self.displayStamp_Label.configure(image=self.stampPic.stamp)
-            for i in range(len(self.photosList)):
-                self.photosList[i].thumbnailForButton = stampForView(self.photosList[i].thumbnailForButton, 0.2,
-                                                                     self.stampPic.image)
-                self.photosList[i].thumbnailForDisplay = stampForView(self.photosList[i].thumbnailForButton, 0.2,
-                                                                      self.stampPic.image)
-                self.photo_button_List[i].configure(self.frame1, image=self.photosList[i].thumbnailForButton)
+
+            # TO Update thumbnail for button in frame 2
+
+            # for i in range(len(self.photosList)):
+            #     self.photosList[i].thumbnailForButton = stampForView(self.photosList[i].thumbnailForButton, 0.2,
+            #                                                          self.stampPic.image)
+            #     self.photosList[i].thumbnailForDisplay = stampForView(self.photosList[i].thumbnailForDisplay, 0.2,
+            #                                                           self.stampPic.image)
 
         else:
             pass
 
     def manipulate(self):
-        if self.manipulation["filter"] is not None:
-            for pic in self.photosList:
-                # TODO: code for applying filter
+        # if self.manipulation["filter"] !='':
+        #     for pic in self.photosList:
+        #         # TODO: code for applying filter
+        #         pass
+        # elif self.manipulation['stamp'] !='':
+        #     for pic in self.photosList:
+        #         # TODO: code for applying stamp
+        #
+        # elif self.manipulation['colorWeight'] !='':
+        #     for pic in self.photosList:
+        #         # TODO: code for manipulating color
+        #         pass
+
+        for i in range(len(self.photosList)):
+            self.processPhoto_list.append(
+                stampForReal(self.photosList[i].image, 0.2, self.stampPic.image))
+        self.saveProject(self.processPhoto_list)
+
+    def saveProject(self, items_List):
+        """
+        This function will take a list of Images and save to disk. This function includes
+            + asking for project name
+            + Creating new folder
+            + saving items
+        :param items_List: <List> a list of Images
+        :return: <void>
+        """
+
+        # Asking dialogue for the folder name
+        inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
+                                                  parent=self.mainWin)
+
+        # Prompt to choose location
+        folderPath = filedialog.askdirectory() + '\{}'.format(inputProjectName)
+
+        # Make a new folder "name"
+        try:
+            os.mkdir(folderPath)
+        except FileExistsError:
+            # Error message
+            ans = messagebox.askyesno("Folder Already Exists",
+                                      "The Folder you are trying to created already exist. Do you want to continue?")
+            if ans == 'no':
                 pass
-        elif self.manipulation['stamp'] is not None:
-            for pic in self.photosList:
-                # TODO: code for applying stamp
-                pass
-        elif self.manipulation['colorWeight'] is not None:
-            for pic in self.photosList:
-                # TODO: code for manipulating color
-                pass
+            else:
+                self.saveProject(items_List)
+
+                # Save items in the list to the new folder
+                for item in items_List:
+                    os.path.join(folderPath, )
+
+                # Ask of the users want to view the folder
+                viewFolder = messagebox.askyesno("Save Completed!",
+                                                 "Your data has been saved to \{}. Do you want to view the folder?"
+                                                 .format(folderPath))
+                # View newly created Folder
+                if viewFolder:
+                    os.startfile(folderPath)
+
+
+
     def run(self):
         self.mainWin.mainloop()
 
