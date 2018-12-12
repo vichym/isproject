@@ -191,6 +191,7 @@ class Window:
                 stampForReal(self.photosList[i].image, 0.2, self.stampPic.image))
         self.saveProject(self.processPhoto_list)
 
+
     def saveProject(self, items_List):
         """
         This function will take a list of Images and save to disk. This function includes
