@@ -54,7 +54,7 @@ class Window:
         # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
         self.blur = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.blur.grid(row=0, column=0, padx=5, pady=5)
-        # self.blur.config(command=self.assignFilter("Blur"))
+        self.blur.config(command=self.assignFilter)
 
         self.contour = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.contour.grid(row=0, column=2, padx=5, pady=5)
@@ -127,18 +127,21 @@ class Window:
             self.photo_button_List[i].configure(width=100, height=100, relief=tk.FLAT, bd=0)
             self.photo_button_List[i].grid(row=i // 5, column=i % 5 + 1, padx=5, pady=5)
 
-            # TODO: assign each Button to self.display() to display specific picture on frame 2.
             # Displaying different object by passing parameters to a function
             # Citation:
-            self.photo_button_List[i].configure(
-                command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
+            self.photo_button_List[i].configure(command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
         self.display_Label.configure(image=photo, width=200, height=photo.height())
         self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
-    def assignFilter(self, filter):
-        self.manipulation["filter"] = filter
+    def assignFilter(self):
+        self.manipulation["filter"] = 'Blur'
+        print(self.manipulation["filter"])
+        manipulate(self.manipulation,self.photosList)
+
+    def bblur(self):
+        self.display_Label.configure(image=blabla.filter(ImageFilter.BLUR))
 
     def assignStamp(self):
         # TODO: assign the stamp image to the self.manipulation dict

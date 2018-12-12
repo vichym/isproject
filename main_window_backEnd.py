@@ -1,5 +1,6 @@
 import os
 from tkinter import filedialog, simpledialog, messagebox
+from PIL import ImageFilter
 
 from main_window_gui import *
 
@@ -108,10 +109,12 @@ def stampForView(image, ratio, stampPNG):
 
 
 def manipulate(dict, photoList):
-    if dict["filter"] is not None:
+    if dict["filter"] =='Blur':
         for pic in photoList:
             # TODO: code for applying filter
-            pass
+            pic.filter(ImageFilter.BLUR)
+            print('a')
+
     elif dict['stamp'] is not None:
         for pic in photoList:
             # TODO: code for applying stamp
