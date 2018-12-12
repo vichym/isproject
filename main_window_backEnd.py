@@ -84,20 +84,6 @@ def stampForReal(image, ratio, stampPNG):
     photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
     return photo
 
-def manipulate(dict, photoList):
-    if dict["filter"] is not None:
-        for pic in photoList:
-            # TODO: code for applying filter
-            pass
-    elif dict['stamp'] is not None:
-        for pic in photoList:
-            # TODO: code for applying stamp
-            pass
-    elif dict['colorWeight'] is not None:
-        for pic in photoList:
-            # TODO: code for manipulating color
-            pass
-
 
 def Test(ratio):
     photo0 = Image.open("astilbe.jpg")
