@@ -1,6 +1,6 @@
-from tkinter import filedialog
+from tkinter import filedialog, Image
 
-from main_window_gui import *
+from PIL import ImageTk
 
 
 class Photo:
@@ -48,23 +48,25 @@ def selectFilesDialogue(rootWindow):
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
 
-def stampForView(image, ratio, stampPNG):
-    """
-    This function resize the stampPNG to the specify ratio to the target image and stamp.
-    :param image: Target Image
-    :param ratio: 0<ratio<1
-    :param stampPNG: PNG image that have transparent background
-    :return: Image
-    """
 
-    w, h = image.size
-    lw = w * ratio
-    lh = h * ratio
-    photo = image.copy()
-    stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
-    photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
-    photo = ImageTk.PhotoImage(photo)
-    return photo
+# def stampForView(image, ratio, stampPNG):
+#     """
+#     This function resize the stampPNG to the specify ratio to the target image and stamp for buttons
+#        in frame 1 and 2.
+#     :param image: Target Image
+#     :param ratio: 0<ratio<1
+#     :param stampPNG: PNG image that have transparent background
+#     :return: Image
+#     """
+#
+#     w, h = image.size
+#     lw = w * ratio
+#     lh = h * ratio
+#     photo = image.copy()
+#     stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
+#     photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
+#     photo = ImageTk.PhotoImage(photo)
+#     return photo
 
 
 def stampForReal(image, ratio, stampPNG):
@@ -85,23 +87,23 @@ def stampForReal(image, ratio, stampPNG):
     return photo
 
 
-def Test(ratio):
-    photo0 = Image.open("astilbe.jpg")
-    w, h = photo0.size
-    lw = w * ratio
-    lh = h * ratio
-    photo = photo0.copy()
-    photo.show()
-    watermark = Image.open("ll.png").copy()
-    watermark.show()
+# def Test(ratio):
+#     photo0 = Image.open("astilbe.jpg")
+#     w, h = photo0.size
+#     lw = w * ratio
+#     lh = h * ratio
+#     photo = photo0.copy()
+#     photo.show()
+#     watermark = Image.open("ll.png").copy()
+#     watermark.show()
+#
+#     watermark.thumbnail((lw, lh), Image.ANTIALIAS)
+#
+#     photo.paste(watermark, (int(w - w * ratio - lw), int(h - ratio * h)), watermark)
+#     photo.show()
 
-    watermark.thumbnail((lw, lh), Image.ANTIALIAS)
 
-    photo.paste(watermark, (int(w - w * ratio - lw), int(h - ratio * h)), watermark)
-    photo.show()
-
-
-if __name__ == '__main__':
+# if __name__ == '__main__':
     # mainWin = tk.Tk()
     # mainWin.withdraw()
     # list = []
@@ -109,6 +111,6 @@ if __name__ == '__main__':
     # mainWin.mainloop()
 
     # Test(0.1)
-
-    files = filedialog.askopenfilename(title='Choose a file')
-    Image.open(files).show()
+    #
+    # files = filedialog.askopenfilename(title='Choose a file')
+    # Image.open(files).show()

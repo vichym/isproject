@@ -1,6 +1,8 @@
 import os
+import tkinter as tk
 from tkinter import simpledialog, messagebox
-
+from PIL import ImageFilter
+from PIL import Image
 from main_window_backEnd import *
 
 
@@ -52,13 +54,13 @@ class Window:
         # TODO: creates buttons for filters,
 
         # 6 filters:
-        pic = Image.open("download.jpg")
+        pic = Image.open('download.jpg')
         self.pic = ImageTk.PhotoImage(pic)
 
         # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
         self.blur = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.blur.grid(row=0, column=0, padx=5, pady=5)
-        self.blur.config(command=self.assignFilter)
+        self.blur.config(command=self.bblur)
 
         self.contour = tk.Button(self.frame3, image=self.pic, width=80, height=80)
         self.contour.grid(row=0, column=2, padx=5, pady=5)
@@ -139,13 +141,12 @@ class Window:
         self.display_Label.configure(image=photo, width=200, height=photo.height())
         self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
-    def assignFilter(self):
-        self.manipulation["filter"] = 'Blur'
-        print(self.manipulation["filter"])
-        manipulate(self.manipulation,self.photosList)
-
     def bblur(self):
-        self.display_Label.configure(image=blabla.filter(ImageFilter.BLUR))
+        for p in range(len(self.photosList)):
+            new = self.photosList[p].image.filter(ImageFilter.BLUR)
+            neww = ImageTk.PhotoImage(new)
+            self.photo_button_List[p].config(image=neww)
+        # self.display_Label.configure(image=blabla.filter(ImageFilter.BLUR))
 
     def assignStamp(self):
         # TODO: assign the stamp image to the self.manipulation dict
@@ -210,28 +211,31 @@ class Window:
         # Make a new folder "name"
         try:
             os.mkdir(folderPath)
+            cnt=0
+            for item in items_List:
+                print('a')
+                cnt+=1
+                # os.path.join(folderPath, '{}.jpeg'.format(item))
+                # print(type(item))
+
+                item.save(folderPath+"\{}.jpg".format(cnt))
+                print(folderPath+'\{}.jpg'.format(cnt))
+                # Ask of the users want to view the folder
+            viewFolder = messagebox.askyesno("Save Completed!",
+                                             "Your data has been saved to \{}. Do you want to view the folder?"
+                                             .format(folderPath))
+            # View newly created Folder
+            if viewFolder:
+                os.startfile(folderPath)
         except FileExistsError:
             # Error message
             ans = messagebox.askyesno("Folder Already Exists",
                                       "The Folder you are trying to created already exist. Do you want to continue?")
             if ans == 'no':
+                print('no')
                 pass
             else:
                 self.saveProject(items_List)
-
-                # Save items in the list to the new folder
-                for item in items_List:
-                    os.path.join(folderPath, )
-
-                # Ask of the users want to view the folder
-                viewFolder = messagebox.askyesno("Save Completed!",
-                                                 "Your data has been saved to \{}. Do you want to view the folder?"
-                                                 .format(folderPath))
-                # View newly created Folder
-                if viewFolder:
-                    os.startfile(folderPath)
-
-
 
     def run(self):
         self.mainWin.mainloop()
