@@ -1,5 +1,4 @@
-import os
-from tkinter import filedialog, simpledialog, messagebox
+from tkinter import filedialog
 
 from main_window_gui import *
 
@@ -49,45 +48,6 @@ def selectFilesDialogue(rootWindow):
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
 
-
-def saveProject(items_List, mainWin):
-    """
-    This function will take a list of Images and save to disk. This function includes
-        + asking for project name
-        + Creating new folder
-        + saving items
-    :param items_List: <List> a list of Images
-    :return: <void>
-    """
-
-    # Asking dialogue for the folder name
-    inputProjectName = simpledialog.askstring("Input Project Name", "How do you like to name your project?",
-                                              parent=mainWin)
-
-    # Prompt to choose location
-    folderPath = filedialog.askdirectory() + '\{}'.format(inputProjectName)
-
-    # Make a new folder "name"
-    try:
-        os.mkdir(folderPath)
-    except FileExistsError:
-        # Error message
-        messagebox.showinfo("Folder Already Exists", "The Folder you are trying to created already exist")
-        saveProject(items_List)
-
-    # Save items in the list to the new folder
-    for item in items_List:
-        os.path.join(folderPath, item)
-
-    # Ask of the users want to view the folder
-    viewFolder = messagebox.askyesno("Save Completed!",
-                                     "Your data has been saved to \{}. Do you want to view the folder?"
-                                     .format(folderPath))
-    # View newly created Folder
-    if viewFolder:
-        os.startfile(folderPath)
-
-
 def stampForView(image, ratio, stampPNG):
     """
     This function resize the stampPNG to the specify ratio to the target image and stamp.
@@ -106,6 +66,23 @@ def stampForView(image, ratio, stampPNG):
     photo = ImageTk.PhotoImage(photo)
     return photo
 
+
+def stampForReal(image, ratio, stampPNG):
+    """
+    This function resize the stampPNG to the specify ratio to the target image and stamp.
+    :param image: Target Image
+    :param ratio: 0<ratio<1
+    :param stampPNG: PNG image that have transparent background
+    :return: Image
+    """
+
+    w, h = image.size
+    lw = w * ratio
+    lh = h * ratio
+    photo = image.copy()
+    stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
+    photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
+    return photo
 
 def manipulate(dict, photoList):
     if dict["filter"] is not None:
