@@ -209,20 +209,26 @@ class Window:
             os.mkdir(folderPath)
         except FileExistsError:
             # Error message
-            messagebox.showinfo("Folder Already Exists", "The Folder you are trying to created already exist")
-            self.saveProject(items_List)
+            ans = messagebox.askyesno("Folder Already Exists",
+                                      "The Folder you are trying to created already exist. Do you want to continue?")
+            if ans == 'no':
+                pass
+            else:
+                self.saveProject(items_List)
 
-        # Save items in the list to the new folder
-        for item in items_List:
-            os.path.join(folderPath, )
+                # Save items in the list to the new folder
+                for item in items_List:
+                    os.path.join(folderPath, )
 
-        # Ask of the users want to view the folder
-        viewFolder = messagebox.askyesno("Save Completed!",
-                                         "Your data has been saved to \{}. Do you want to view the folder?"
-                                         .format(folderPath))
-        # View newly created Folder
-        if viewFolder:
-            os.startfile(folderPath)
+                # Ask of the users want to view the folder
+                viewFolder = messagebox.askyesno("Save Completed!",
+                                                 "Your data has been saved to \{}. Do you want to view the folder?"
+                                                 .format(folderPath))
+                # View newly created Folder
+                if viewFolder:
+                    os.startfile(folderPath)
+
+
 
     def run(self):
         self.mainWin.mainloop()
