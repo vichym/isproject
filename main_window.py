@@ -218,7 +218,7 @@ class Window:
 
                 # Save items in the list to the new folder
                 for item in items_List:
-                    os.path.join(folderPath, )
+                    item.save(folderPath, "{}".format(item))
 
                 # Ask of the users want to view the folder
                 viewFolder = messagebox.askyesno("Save Completed!",
