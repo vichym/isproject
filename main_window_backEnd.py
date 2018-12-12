@@ -31,6 +31,7 @@ class Photo:
         else:
             newW = maxSideLength
             newH = maxSideLength
+
         newPic = self.image.copy()
         newPic.thumbnail((newW, newH))
         # covert to ImageTK object to be used with tkinter button widget
@@ -102,6 +103,7 @@ def stampForView(image, ratio, stampPNG):
     photo = image.copy()
     stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
     photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
+    photo = ImageTk.PhotoImage(photo)
     return photo
 
 
@@ -126,7 +128,9 @@ def Test(ratio):
     lw = w * ratio
     lh = h * ratio
     photo = photo0.copy()
+    photo.show()
     watermark = Image.open("ll.png").copy()
+    watermark.show()
 
     watermark.thumbnail((lw, lh), Image.ANTIALIAS)
 
@@ -141,4 +145,7 @@ if __name__ == '__main__':
     # saveProject(list)
     # mainWin.mainloop()
 
-    stamp(0.1)
+    # Test(0.1)
+
+    files = filedialog.askopenfilename(title='Choose a file')
+    Image.open(files).show()

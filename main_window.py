@@ -92,7 +92,7 @@ class Window:
         # TODO: Create a canvas, and an "Add Stamp" button under that canvas
         self.displayStamp_Label = tk.Label(self.frame4, relief=tk.GROOVE)
         self.displayStamp_Label.configure(width=200, height=150, image=self.pic)
-        self.displayStamp_Label.grid(padx=5, pady=10)
+        self.displayStamp_Label.grid(padx=5, pady=5)
 
         self.addStamp_Button = tk.Button(self.frame4, text="Add Logo", command=self.loadStampPic)
         self.addStamp_Button.grid()
@@ -102,8 +102,6 @@ class Window:
         # TODO: Create process button on the button right corner.
         self.processButton = tk.Button(self.frame5, text='Proceed', font='Arial 9 bold')
         self.processButton.pack(side="right")
-
-
 
     def selectFilesDialogue(self):
         """
@@ -147,12 +145,36 @@ class Window:
         pass
 
     def loadStampPic(self):
-        file = filedialog.askopenfile(filetypes=[("PNG files", "*.png")])
-        self.stampPic = Image.open(file,"r")
-        self.manipulation["stamp"] = self.stampPic
-        self.displayStamp_Label.configure(image=self.stampPic)
+        file = filedialog.askopenfilename(filetypes=[("PNG files", "*.png"), ("JPG files", "*.jpg")])
 
+        if file != '':
+            self.stampPic = Photo(file)
+            self.manipulation["stamp"] = self.stampPic.image
+            self.stampPic.stamp = self.stampPic.createThumbnail(200)
+            self.displayStamp_Label.configure(image=self.stampPic.stamp)
+            for i in range(len(self.photosList)):
+                self.photosList[i].thumbnailForButton = stampForView(self.photosList[i].thumbnailForButton, 0.2,
+                                                                     self.stampPic.image)
+                self.photosList[i].thumbnailForDisplay = stampForView(self.photosList[i].thumbnailForButton, 0.2,
+                                                                      self.stampPic.image)
+                self.photo_button_List[i].configure(self.frame1, image=self.photosList[i].thumbnailForButton)
 
+        else:
+            pass
+
+    def manipulate(self):
+        if self.manipulation["filter"] is not None:
+            for pic in self.photosList:
+                # TODO: code for applying filter
+                pass
+        elif self.manipulation['stamp'] is not None:
+            for pic in self.photosList:
+                # TODO: code for applying stamp
+                pass
+        elif self.manipulation['colorWeight'] is not None:
+            for pic in self.photosList:
+                # TODO: code for manipulating color
+                pass
     def run(self):
         self.mainWin.mainloop()
 
