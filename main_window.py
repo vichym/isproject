@@ -18,10 +18,10 @@ class Window:
 
         # Create 4 main frames
         # TODO: create frame 5 that contain 'process' button at the bottom right corner
-        self.frame1 = tk.Frame(self.mainWin, width=700, height=350, background="white", bd=5, relief=tk.SUNKEN)
-        self.frame2 = tk.Frame(self.mainWin, width=220, height=350, background="blue", bd=5, relief=tk.GROOVE)
-        self.frame3 = tk.Frame(self.mainWin, width=700, height=200, background="Yellow", bd=5)
-        self.frame4 = tk.Frame(self.mainWin, width=220, height=200, background="green", bd=5)
+        self.frame1 = tk.Frame(self.mainWin, width=700, height=320, background="white", bd=5, relief=tk.SUNKEN)
+        self.frame2 = tk.Frame(self.mainWin, width=220, height=320, background="blue", bd=5, relief=tk.GROOVE)
+        self.frame3 = tk.Frame(self.mainWin, width=700, height=230, background="Yellow", bd=5)
+        self.frame4 = tk.Frame(self.mainWin, width=220, height=230, background="green", bd=5)
         self.frame5 = tk.Frame(self.mainWin, bd=5)
         self.frame1.grid(row=0, column=0)
         self.frame2.grid(row=0, column=1)
@@ -59,29 +59,35 @@ class Window:
         self.pic = ImageTk.PhotoImage(pic)
 
         # https://pillow.readthedocs.io/en/5.1.x/reference/ImageFilter.html
-        self.blur = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.blurPic = ImageTk.PhotoImage(pic.filter(ImageFilter.BLUR))
+        self.blur = tk.Button(self.frame3, image=self.blurPic, width=90, height=90, text='Blur',compound='center')
         self.blur.grid(row=0, column=0, padx=5, pady=5)
-        self.blur.config(command=self.bblur)
+        self.blur.config(command=self.blurFunction)
 
-        self.contour = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.contourPic = ImageTk.PhotoImage(pic.filter(ImageFilter.CONTOUR))
+        self.contour = tk.Button(self.frame3, image=self.contourPic, width=90, height=90, text='Contour', compound='center')
         self.contour.grid(row=0, column=2, padx=5, pady=5)
-        # self.contour.config(command=self.assignFilter("Contour"))
+        self.contour.config(command=self.contourFunction)
 
-        self.edgeEnhance = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.edgeEnhancePic = ImageTk.PhotoImage(pic.filter(ImageFilter.EDGE_ENHANCE))
+        self.edgeEnhance = tk.Button(self.frame3, image=self.edgeEnhancePic, width=90, height=90, text='Edge Enhance', compound='center')
         self.edgeEnhance.grid(row=0, column=4, padx=5, pady=5)
-        # self.edgeEnhance.config(command=self.assignFilter("Enhance Edge"))
+        self.edgeEnhance.config(command=self.edgeEnhanceFunction)
 
-        self.emboss = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.embossPic = ImageTk.PhotoImage(pic.filter(ImageFilter.EMBOSS))
+        self.emboss = tk.Button(self.frame3, image=self.embossPic, width=90, height=90, text = 'Emboss', compound='center')
         self.emboss.grid(row=2, column=0, padx=5, pady=5)
-        # self.emboss.config(command=self.ADD)
+        self.emboss.config(command=self.embossFunction)
 
-        self.sharpen = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.sharpenPic = ImageTk.PhotoImage(pic.filter(ImageFilter.SHARPEN))
+        self.sharpen = tk.Button(self.frame3, image=self.sharpenPic, width=90, height=90, text='Sharpen', compound='center')
         self.sharpen.grid(row=2, column=2, padx=5, pady=5)
-        # self.sharpen.config(command=self.ADD)
+        self.sharpen.config(command=self.sharpenFunction)
 
-        self.smooth = tk.Button(self.frame3, image=self.pic, width=80, height=80)
+        self.smoothPic = ImageTk.PhotoImage(pic.filter(ImageFilter.SMOOTH))
+        self.smooth = tk.Button(self.frame3, image=self.smoothPic, width=90, height=90, text='Smooth',compound='center')
         self.smooth.grid(row=2, column=4, padx=5, pady=5)
-        # self.smooth.config(command=self.ADD)
+        self.smooth.config(command=self.smoothFunction)
 
         # the 3 scale widgets
         self.scaleRED = tk.Scale(self.frame3, from_=-1, to_=1, orient='vertical', activebackground='red', label='Red')
@@ -102,7 +108,7 @@ class Window:
         self.displayStamp_Label.grid(padx=5, pady=5)
 
         self.addStamp_Button = tk.Button(self.frame4, text="Add Logo", command=self.loadStampPic)
-        self.addStamp_Button.grid()
+        self.addStamp_Button.grid(sticky='S',pady=15)
 
         # ====================FRAME 5==========================
         # TODO: Create process button on the button right corner.
@@ -141,10 +147,23 @@ class Window:
         self.display_Label.configure(image=photo, width=200, height=photo.height())
         self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
-    def bblur(self):
+    def blurFunction(self):
         self.manipulation['filter']='Blur'
 
+    def contourFunction(self):
+        self.manipulation['filter']='Contour'
 
+    def edgeEnhanceFunction(self):
+        self.manipulation['filter'] = 'Edge Enhance'
+
+    def embossFunction(self):
+        self.manipulation['filter'] = 'Emboss'
+
+    def sharpenFunction(self):
+        self.manipulation['filter'] = 'Sharpen'
+
+    def smoothFunction(self):
+        self.manipulation['filter'] = 'Smooth'
     def assignStamp(self):
         # TODO: assign the stamp image to the self.manipulation dict
         pass
@@ -192,19 +211,40 @@ class Window:
             for pic in self.photosList:
                 # TODO: code for applying filter
                 self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.BLUR), 0.2, self.stampPic.image))
-        # elif self.manipulation['stamp'] !='':
-        #     for pic in self.photosList:
-        #         # TODO: code for applying stamp
-        #
+
+        elif self.manipulation['filter'] == 'Contour':
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.CONTOUR), 0.2, self.stampPic.image))
+
+        elif self.manipulation['filter'] == 'Edge Enhance':
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.EDGE_ENHANCE), 0.2, self.stampPic.image))
+
+        elif self.manipulation['filter'] == 'Emboss':
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.EMBOSS), 0.2, self.stampPic.image))
+
+        elif self.manipulation['filter'] == 'Sharpen':
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.SHARPEN), 0.2, self.stampPic.image))
+
+        elif self.manipulation['filter'] == 'Smooth':
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image.filter(ImageFilter.SMOOTH), 0.2, self.stampPic.image))
+
+        else:
+            for pic in self.photosList:
+                self.processPhoto_list.append(stampForReal(pic.image,0.2,self.stampPic.image))
+
+
         # elif self.manipulation['colorWeight'] !='':
         #     for pic in self.photosList:
         #         # TODO: code for manipulating color
         #         pass
 
-        # for pic in self.processPhoto_list:
-        #     self.processPhoto_list.append(stampForReal(pic, 0.2, self.stampPic.image))
-        self.saveProject(self.processPhoto_list)
 
+        self.saveProject(self.processPhoto_list)
+        self.processPhoto_list.clear()
 
     def saveProject(self, items_List):
         """
@@ -238,6 +278,7 @@ class Window:
             # View newly created Folder
             if viewFolder:
                 os.startfile(folderPath)
+
         except FileExistsError:
             # Error message
             ans = messagebox.askyesno("Folder Already Exists",
