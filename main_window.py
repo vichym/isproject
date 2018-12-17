@@ -140,29 +140,37 @@ class Window:
             self.photo_button_List[i].configure(command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
+        ''' '''
         self.display_Label.configure(image=photo, width=200, height=photo.height())
         self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
     def blurFunction(self):
+        ''''''
         self.manipulation['filter']='Blur'
 
     def contourFunction(self):
+        ''''''
         self.manipulation['filter']='Contour'
 
     def edgeEnhanceFunction(self):
+        ''''''
         self.manipulation['filter'] = 'Edge Enhance'
 
     def embossFunction(self):
+        ''''''
         self.manipulation['filter'] = 'Emboss'
 
     def sharpenFunction(self):
+        ''''''
         self.manipulation['filter'] = 'Sharpen'
 
     def smoothFunction(self):
+        ''''''
         self.manipulation['filter'] = 'Smooth'
 
 
     def loadStampPic(self):
+        ''''''
         file = filedialog.askopenfilename(filetypes=[("PNG files", "*.png"), ("JPG files", "*.jpg")])
 
         if file != '':
@@ -184,6 +192,7 @@ class Window:
 
 
     def manipulate(self):
+        ''''''
         if self.manipulation["filter"] == 'Blur':
             for pic in self.photosList:
                 # TODO: code for applying filter
@@ -267,6 +276,7 @@ class Window:
                 self.saveProject(items_List)
 
     def run(self):
+        ''''''
         self.mainWin.mainloop()
 
 
