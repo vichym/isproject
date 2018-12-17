@@ -17,7 +17,6 @@ class Window:
         self.manipulation = {"filter": '', "stamp": {}, "colorWeight": "{}"}
 
         # Create 4 main frames
-        # TODO: create frame 5 that contain 'process' button at the bottom right corner
         self.frame1 = tk.Frame(self.mainWin, width=700, height=320, background="white", bd=5, relief=tk.SUNKEN)
         self.frame2 = tk.Frame(self.mainWin, width=220, height=320, background="blue", bd=5, relief=tk.GROOVE)
         self.frame3 = tk.Frame(self.mainWin, width=700, height=230, background="Yellow", bd=5)
@@ -52,7 +51,6 @@ class Window:
         self.display_Label.grid_forget()
 
         # ====================FRAME 3==========================
-        # TODO: creates buttons for filters,
 
         # 6 filters:
 
@@ -102,7 +100,6 @@ class Window:
         self.scaleBLUE.grid(row=0, column=8, padx=10, rowspan=3)
 
         # ====================FRAME 4==========================
-        # TODO: Create a canvas, and an "Add Stamp" button under that canvas
         self.displayStamp_Label = tk.Label(self.frame4, relief=tk.GROOVE)
         self.displayStamp_Label.configure(width=200, height=150, image=self.pic)
         self.displayStamp_Label.grid(padx=5, pady=5)
@@ -111,7 +108,6 @@ class Window:
         self.addStamp_Button.grid(sticky='S',pady=15)
 
         # ====================FRAME 5==========================
-        # TODO: Create process button on the button right corner.
         self.processButton = tk.Button(self.frame5, text='Proceed', font='Arial 9 bold', command=self.manipulate)
         self.processButton.pack(side="right")
 
@@ -164,9 +160,7 @@ class Window:
 
     def smoothFunction(self):
         self.manipulation['filter'] = 'Smooth'
-    def assignStamp(self):
-        # TODO: assign the stamp image to the self.manipulation dict
-        pass
+
 
     def loadStampPic(self):
         file = filedialog.askopenfilename(filetypes=[("PNG files", "*.png"), ("JPG files", "*.jpg")])
@@ -188,24 +182,7 @@ class Window:
         else:
             pass
 
-    # def manipulate(self):
-    #     if self.manipulation["filter"] == 'Blur':
-    #         for pic in self.photosList:
-    #             # TODO: code for applying filter
-    #             self.processPhoto_list.append(pic.image.filter(ImageFilter.BLUR))
-    #     # elif self.manipulation['stamp'] !='':
-    #     #     for pic in self.photosList:
-    #     #         # TODO: code for applying stamp
-    #     #
-    #     # elif self.manipulation['colorWeight'] !='':
-    #     #     for pic in self.photosList:
-    #     #         # TODO: code for manipulating color
-    #     #         pass
-    #
-    #     for i in range(len(self.photosList)):
-    #         self.processPhoto_list.append(
-    #             stampForReal(self.photosList[i].image, 0.2, self.stampPic.image))
-    #     self.saveProject(self.processPhoto_list)
+
     def manipulate(self):
         if self.manipulation["filter"] == 'Blur':
             for pic in self.photosList:
