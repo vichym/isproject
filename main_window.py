@@ -135,18 +135,19 @@ class Window:
 
             # Displaying different object by passing parameters to a function
             # Citation:
-            self.photo_button_List[i].configure(
-                command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
+            self.photo_button_List[i].configure(command=lambda x=self.photosList[i].thumbnailForDisplay: self.display(x))
 
     def display(self, photo):
         self.display_Label.configure(image=photo, width=200, height=photo.height())
         self.display_Label.grid(row=0, column=0, padx=5, pady=10, sticky='swen')
 
     def bblur(self):
-        for p in range(len(self.photosList)):
-            new = self.photosList[p].image.filter(ImageFilter.BLUR)
-            neww = ImageTk.PhotoImage(new)
-            self.photo_button_List[p].config(image=neww)
+        self.manipulation['filter']='Blur'
+        # for p in range(len(self.photosList)):
+        #     new = self.photosList[p].image.filter(ImageFilter.BLUR)
+        #     neww = ImageTk.PhotoImage(new)
+        #     self.photo_button_List[p].config(image=neww)
+
         # self.display_Label.configure(image=blabla.filter(ImageFilter.BLUR))
 
     def assignStamp(self):
@@ -174,10 +175,10 @@ class Window:
             pass
 
     def manipulate(self):
-        # if self.manipulation["filter"] !='':
-        #     for pic in self.photosList:
-        #         # TODO: code for applying filter
-        #         pass
+        if self.manipulation["filter"] == 'Blur':
+            for pic in self.photosList:
+                # TODO: code for applying filter
+                self.processPhoto_list.append(pic.image.filter(ImageFilter.BLUR))
         # elif self.manipulation['stamp'] !='':
         #     for pic in self.photosList:
         #         # TODO: code for applying stamp
@@ -191,6 +192,26 @@ class Window:
             self.processPhoto_list.append(
                 stampForReal(self.photosList[i].image, 0.2, self.stampPic.image))
         self.saveProject(self.processPhoto_list)
+    # def manipulate(self):
+    #     if self.manipulation["filter"] == 'Blur':
+    #         for pic in self.photosList:
+    #             # TODO: code for applying filter
+    #             self.processPhoto_list.append(pic.image.filter(ImageFilter.BLUR))
+    #     # elif self.manipulation['stamp'] !='':
+    #     #     for pic in self.photosList:
+    #     #         # TODO: code for applying stamp
+    #     #
+    #     # elif self.manipulation['colorWeight'] !='':
+    #     #     for pic in self.photosList:
+    #     #         # TODO: code for manipulating color
+    #     #         pass
+    #
+    #     for pic in self.processPhoto_list:
+    #
+    #         stampForReal(pic, 0.2, self.stampPic.image)
+    #         pic.show()
+    #     self.saveProject(self.processPhoto_list)
+
 
     def saveProject(self, items_List):
         """
