@@ -1,3 +1,5 @@
+'''This file holds codes for image processing '''
+
 from tkinter import filedialog
 
 from PIL import ImageTk, Image
@@ -47,26 +49,6 @@ def selectFilesDialogue(rootWindow):
     files = filedialog.askopenfilenames(parent=rootWindow, title='Choose a file')
     selectedFiles = rootWindow.tk.splitlist(files)
     return selectedFiles
-
-
-# def stampForView(image, ratio, stampPNG):
-#     """
-#     This function resize the stampPNG to the specify ratio to the target image and stamp for buttons
-#        in frame 1 and 2.
-#     :param image: Target Image
-#     :param ratio: 0<ratio<1
-#     :param stampPNG: PNG image that have transparent background
-#     :return: Image
-#     """
-#
-#     w, h = image.size
-#     lw = w * ratio
-#     lh = h * ratio
-#     photo = image.copy()
-#     stampPNG.thumbnail((lw, lh), Image.ANTIALIAS)
-#     photo.paste(stampPNG, (int(w - w * ratio - lw), int(h - ratio * h)), stampPNG)
-#     photo = ImageTk.PhotoImage(photo)
-#     return photo
 
 
 def stampForReal(image, ratio, stampPNG):
