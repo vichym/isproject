@@ -4,7 +4,6 @@
 import os
 import tkinter as tk
 from tkinter import simpledialog, messagebox
-
 from PIL import ImageFilter
 
 from main_window_backEnd import *
@@ -56,7 +55,7 @@ class Window:
         # ====================FRAME 3==========================
 
         # 6 filters:
-        pic = Image.open('download.jpg')
+        pic =Image.open('download.jpg')
         self.pic = ImageTk.PhotoImage(pic)
 
         self.blurPic = ImageTk.PhotoImage(pic.filter(ImageFilter.BLUR))
