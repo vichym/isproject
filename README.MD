@@ -20,12 +20,16 @@ These images will be displayed alongside the original top left box. If these ima
 Next, the user can choose to add a filter to the images being selected by clicking the buttons in the yellow section of frame two. These filters are not visible in the thumbnail picture, but rest assure your photos are being changed. Now, the main purpose of ISP, the stamping.
 
 After the set of images are selected and filter is applied, the user can click on the add logo button in the green section of frame 2. This will pop up the user’s files, allowing the user to select a logo he or she wishes to implement in all the chosen pictures. This logo will be immediately displayed, reassuring the user that its logo chosen is the correct one.
+
 ![Screenshot4](app_screenshot/ispscreenshot2.png)
 
 After all of this is done, the user must then click on the proceed button. Another pop-up window will appear. This pop-up window enables the user to save his/her processed images in a file of his/her choosing.
+
 ![Screenshot5](app_screenshot/ispscreenshot3.png)
+
 ![Screenshot6](app_screenshot/ispscreenshot4.png)
----
+
+
 ###Contents of the Program:
 
 The directory contains two important files: `main_window.py`  script and `main_window_backEnd.py` script. The organization of our project is simple yet efficient. The `main_window.py` script contains the bulk of our code. This script contains the GUI interface code, all the code for the widgets to be formed, and contains the code that links all the helper functions with their corresponding widget. The `main_window_backEnd.py` script is the one that makes image manipulation possible. Located in this script are all the helper functions such as `createThumbnail`, which creates a copy of the selected images by manipulating them, the `selecFilesDialogue` function which allows the user to select the pictures he/she wants to manipulate from her computer, the StampForReal function that stamps the photo and returns the new picture created through image manipulation.
