@@ -8,23 +8,23 @@ Image Stamping Project,  abbreviated ISP, is designed to appeal the average cons
 ### Instructions
 
 ISP can be launched via the use of a python interpreter known as Pycharm. Once the set of files containing the scripts are downloaded and opened as a python project, a set of images will be downloaded as well as the main python scripts main_window.py and main_window_backEnd.py. The images downloaded along with the main scripts are only there to get comfortable with the  testing the program. Once comfortable, the user starts the image manipulation process with his/her own photos.
-![Screenshot1](ispscreenshot0.png)
+![Screenshot1](app_screenshot/ispscreenshot0.png)
 
 Once downloaded,  the following step is to get ISP up and running. To do this, the user must run the main_window.py file. Once this file runs, a GUI window will pop up, displaying Frame 2. Once this frame runs, you will encounter several boxes each displaying different types of information. The box located in the top left corner, if clicked, will allow the user to access his/her files and search for a set of images he/she wants to be processes with ISP.
-![Screenshot2](ispscreenshot5.png)
+![Screenshot2](app_screenshot/ispscreenshot5.png)
 
 
 These images will be displayed alongside the original top left box. If these images are clicked, then in the blue section of frame 2 will a thumbnail of this image be displayed. This thumbnail is dynamic and will change depending on which Image is being selected. 
-![Screenshot3](ispscreenshot1.png)
+![Screenshot3](app_screenshot/ispscreenshot1.png)
 
 Next, the user can choose to add a filter to the images being selected by clicking the buttons in the yellow section of frame two. These filters are not visible in the thumbnail picture, but rest assure your photos are being changed. Now, the main purpose of ISP, the stamping.
 
 After the set of images are selected and filter is applied, the user can click on the add logo button in the green section of frame 2. This will pop up the user’s files, allowing the user to select a logo he or she wishes to implement in all the chosen pictures. This logo will be immediately displayed, reassuring the user that its logo chosen is the correct one.
-![Screenshot4](ispscreenshot2.png)
+![Screenshot4](app_screenshot/ispscreenshot2.png)
 
 After all of this is done, the user must then click on the proceed button. Another pop-up window will appear. This pop-up window enables the user to save his/her processed images in a file of his/her choosing.
-![Screenshot5](ispscreenshot3.png)
-![Screenshot6](ispscreenshot4.png)
+![Screenshot5](app_screenshot/ispscreenshot3.png)
+![Screenshot6](app_screenshot/ispscreenshot4.png)
 ---
 ###Contents of the Program:
 
