@@ -30,12 +30,12 @@ After all of this is done, the user must then click on the proceed button. Anoth
 ![Screenshot6](app_screenshot/ispscreenshot4.png)
 
 
-###Contents of the Program:
+### Contents of the Program:
 
 The directory contains two important files: `main_window.py`  script and `main_window_backEnd.py` script. The organization of our project is simple yet efficient. The `main_window.py` script contains the bulk of our code. This script contains the GUI interface code, all the code for the widgets to be formed, and contains the code that links all the helper functions with their corresponding widget. The `main_window_backEnd.py` script is the one that makes image manipulation possible. Located in this script are all the helper functions such as `createThumbnail`, which creates a copy of the selected images by manipulating them, the `selecFilesDialogue` function which allows the user to select the pictures he/she wants to manipulate from her computer, the StampForReal function that stamps the photo and returns the new picture created through image manipulation.
 
 We are confident that the widgets and our functions works because we are able to select them accordingly and perform the function we want them to do. We tested these functions through trial and error, making sure the desired result was achieved for ISP.
 
-###Conclusion:
+### Conclusion:
 
 This project was a test of patience. It really helped us, as aspiring computer scientists, learn what it takes to tackle a problem head on and seek solutions to it. It helped us understand the meaning of teamwork, and most importantly communication. A big part of this project was communication, or lack thereof at times. Without the right communication, it was difficult to make progress because two or more people would be working on a single issue without knowing of it, limiting our potential. That being said, we were successful in the implementation of our project. Although the end goal aspired was met, the way it was done so was not what we wanted. We wanted a program that would look neat, work smoothly, and displaying real life changes in the created thumbnail, including RGB color manipulation from scroll bars, filters, and different pictures. Although this goal was ultimately met, we realized that these changes could not be displayed in real time on the GUI because the GUI uses a photoImage object to display the thumbnail as a frame, but the image manipulation occurs using only an Image type. Furthermore,  we had also hoped to use more filters in the end result, but since we couldn't get a scroll-bar widget to work, we decided to do away with it. If we have had more time, we would implement more filters, try to find a solution to display dynamic changes in real time in the GUI, make a working scroll bar and ultimately make the frame look neater and smoother. 
