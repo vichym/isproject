@@ -1,5 +1,6 @@
 # Image Stamping Project
 ##### Author: Vichearith Meas, Ngo Nhat, Alejandro Aguilar
+This is the final project for the introductory course to computer science major, COMP123 : 	Core Concepts in Comp Science. 
 
 ### Summary
 
